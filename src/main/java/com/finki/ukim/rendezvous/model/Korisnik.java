@@ -36,17 +36,15 @@ public class Korisnik {
     private String surname;
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "hobby")
-    private HobbyEnum hobby;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "korisnik")
     private Set<Sports> sports;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "korisnik")
+    private Set<Hobbies> hobbies;
 
 
-    public Korisnik(String name, String surname, Date dateOfBirth, HobbyEnum hobby) {
+    public Korisnik(String name, String surname, Date dateOfBirth) {
         this.name = name;
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
-        this.hobby = hobby;
     }
 }

@@ -44,8 +44,7 @@ public class KorisnikController {
     public ResponseEntity<Korisnik> createKorisnik(@RequestBody Korisnik korisnik) {
         try {
             Korisnik _korisnik = korisnikService
-                .save(new Korisnik(korisnik.getName(), korisnik.getSurname(), korisnik.getDateOfBirth(),
-                    korisnik.getHobby()));
+                .save(new Korisnik(korisnik.getName(), korisnik.getSurname(), korisnik.getDateOfBirth()));
             return new ResponseEntity<>(_korisnik, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
