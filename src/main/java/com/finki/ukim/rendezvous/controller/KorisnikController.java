@@ -2,6 +2,7 @@ package com.finki.ukim.rendezvous.controller;
 
 import com.finki.ukim.rendezvous.model.Korisnik;
 import com.finki.ukim.rendezvous.repository.KorisnikRepository;
+import com.finki.ukim.rendezvous.service.KorisnikService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,18 +22,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class KorisnikController {
     @Autowired
-    KorisnikRepository korisnikRepository;
+    KorisnikService korisnikService;
 
     @GetMapping("/users")
     public ResponseEntity<List<Korisnik>> getAllSports() {
         List<Korisnik> korisnici = new ArrayList<>();
-        korisnici = korisnikRepository.findAll();
+        korisnici = korisnikService.findAll();
         return new ResponseEntity<>(korisnici, HttpStatus.OK);
     }
 
     @GetMapping("/users/{id}")
     public ResponseEntity<Korisnik> getKorisnikById(@PathVariable("id") long id) {
-        Optional<Korisnik> korisnikData = korisnikRepository.findById(id);
+        Optional<Korisnik> korisnikData = korisnikService.findById(id);
         if (korisnikData.isPresent()) {
             return new ResponseEntity<>(korisnikData.get(), HttpStatus.OK);
         } else {
@@ -43,7 +44,7 @@ public class KorisnikController {
     @PostMapping("/users")
     public ResponseEntity<Korisnik> createKorisnik(@RequestBody Korisnik korisnik) {
         try {
-            Korisnik _korisnik = korisnikRepository
+            Korisnik _korisnik = korisnikService
                 .save(new Korisnik(korisnik.getName(), korisnik.getSurname(), korisnik.getDateOfBirth(),
                     korisnik.getSport()));
             return new ResponseEntity<>(_korisnik, HttpStatus.CREATED);
@@ -54,14 +55,14 @@ public class KorisnikController {
 
     @PutMapping("/users/{id}")
     public ResponseEntity<Korisnik> updateTutorial(@PathVariable("id") long id, @RequestBody Korisnik korisnik) {
-        Optional<Korisnik> korisnikData = korisnikRepository.findById(id);
+        Optional<Korisnik> korisnikData = korisnikService.findById(id);
         if (korisnikData.isPresent()) {
             Korisnik _korisnik = korisnikData.get();
             _korisnik.setName(korisnik.getName());
             _korisnik.setSurname(korisnik.getSurname());
             _korisnik.setDateOfBirth(korisnik.getDateOfBirth());
             _korisnik.setSport(korisnik.getSport());
-            return new ResponseEntity<>(korisnikRepository.save(_korisnik), HttpStatus.OK);
+            return new ResponseEntity<>(korisnikService.save(_korisnik), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -70,7 +71,7 @@ public class KorisnikController {
     @DeleteMapping("/users/{id}")
     public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") long id) {
         try {
-            korisnikRepository.deleteById(id);
+            korisnikService.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -80,7 +81,7 @@ public class KorisnikController {
     @DeleteMapping("/users")
     public ResponseEntity<HttpStatus> deleteAllKorisniks() {
         try {
-            korisnikRepository.deleteAll();
+            korisnikService.deleteAll();
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
