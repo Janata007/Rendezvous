@@ -7,5 +7,10 @@ public enum SportEnum {
     RUNNING,
     GYM,
     HIIT,
-    CROSSFIT
+    CROSSFIT,
+    GOLF,
+    VOLLEYBALL,
+    HOCKEY,
+    BASKETBALL,
+    BASEBALL
 }

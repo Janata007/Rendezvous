@@ -1,7 +1,6 @@
 package com.finki.ukim.rendezvous.controller;
 
 import com.finki.ukim.rendezvous.model.Korisnik;
-import com.finki.ukim.rendezvous.repository.KorisnikRepository;
 import com.finki.ukim.rendezvous.service.KorisnikService;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +45,7 @@ public class KorisnikController {
         try {
             Korisnik _korisnik = korisnikService
                 .save(new Korisnik(korisnik.getName(), korisnik.getSurname(), korisnik.getDateOfBirth(),
-                    korisnik.getSport()));
+                    korisnik.getHobby()));
             return new ResponseEntity<>(_korisnik, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -61,7 +60,7 @@ public class KorisnikController {
             _korisnik.setName(korisnik.getName());
             _korisnik.setSurname(korisnik.getSurname());
             _korisnik.setDateOfBirth(korisnik.getDateOfBirth());
-            _korisnik.setSport(korisnik.getSport());
+            _korisnik.setSports(korisnik.getSports());
             return new ResponseEntity<>(korisnikService.save(_korisnik), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

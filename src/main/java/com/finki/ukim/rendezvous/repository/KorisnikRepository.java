@@ -7,8 +7,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface KorisnikRepository extends JpaRepository<Korisnik, Long> {
     List<Korisnik> findAll();
+
     Optional<Korisnik> findById(long id);
+
     Korisnik save(Korisnik korisnik);
+
     void deleteById(long id);
+
     void deleteAll();
 }
