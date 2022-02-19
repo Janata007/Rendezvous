@@ -1,13 +1,10 @@
 package com.finki.ukim.rendezvous.model;
 
-import com.finki.ukim.rendezvous.model.enums.HobbyEnum;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,6 +37,8 @@ public class Korisnik {
     private Set<Sports> sports;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "korisnik")
     private Set<Hobbies> hobbies;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "korisnik")
+    private Set<Locations> locations;
 
 
     public Korisnik(String name, String surname, Date dateOfBirth) {

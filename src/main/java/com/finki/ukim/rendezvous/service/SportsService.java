@@ -8,12 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class SportsService {
     @Autowired
-    SportsRepository sportsRepository;
+    private SportsRepository sportsRepository;
 
-    public List<Sports> findAll(){
+    public List<Sports> findAll() {
         return this.sportsRepository.findAll();
     }
-    public Sports findByKorisnit(Korisnik korisnik){
+
+    public Sports findByKorisnit(Korisnik korisnik) {
         return this.sportsRepository.findByKorisnik(korisnik);
     }
 
