@@ -1,0 +1,49 @@
+/*? VARIABLES (SUBJECT TO CHANGE) */
+
+:root {
+  /** FONT STYLES */
+  --montserrat: "Montserrat", sans-serif;
+
+  --xs: 12px;
+  --s: 14px;
+  --md: 16px;
+  --lg: 18px;
+  --xl: 20px;
+  --xxl: 2rem;
+  --big: 3rem;
+  --huge: 5rem;
+  --icon: 30px;
+
+  /** COLORS */
+
+  /** PADDINGS & MARGINS */
+  --s-padding: 0.25em;
+  --md-padding: 0.5em;
+  --lg-padding: 1em;
+  --xl-padding: 2em;
+  --xxl-padding: 3em;
+  --big-padding: 5em;
+  --huge-padding: 10em;
+  --submenu-padding: 200px;
+
+  --s-margin: 0.25rem;
+  --md-margin: 0.5rem;
+  --lg-margin: 1rem;
+  --xl-margin: 2rem;
+  --xxl-margin: 3rem;
+  --big-margin: 5rem;
+  --huge-margin: 10rem;
+  --auto-margin: auto;
+
+  /** RADIUS */
+  --s-radius: 5px;
+  --md-radius: 10px;
+  --lg-radius: 20px;
+  --circle: 50%;
+
+  /** URLS */
+
+  /** WIDTHS & HEIGHTS */
+}
+
+/*? VARIABLES END */
