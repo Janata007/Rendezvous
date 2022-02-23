@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface SportsRepository extends JpaRepository<Sports, Long> {
     List<Sports> findAll();
 
-    Optional<Sports> findByKorisnik(Korisnik korisnik);
+    List<Sports> findByKorisnik(Korisnik korisnik);
 }

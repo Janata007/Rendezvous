@@ -17,7 +17,7 @@ public class SportsService {
         return this.sportsRepository.findAll();
     }
 
-    public Optional<Sports> findByKorisnit(Korisnik korisnik) {
+    public List<Sports> findByKorisnik(Korisnik korisnik) {
         return this.sportsRepository.findByKorisnik(korisnik);
     }
 
