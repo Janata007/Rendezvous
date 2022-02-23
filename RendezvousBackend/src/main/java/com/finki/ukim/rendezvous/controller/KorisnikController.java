@@ -24,7 +24,7 @@ public class KorisnikController {
     KorisnikService korisnikService;
 
     @GetMapping("/users")
-    public ResponseEntity<List<Korisnik>> getAllSports() {
+    public ResponseEntity<List<Korisnik>> getAllKorisnici() {
         List<Korisnik> korisnici = new ArrayList<>();
         korisnici = korisnikService.findAll();
         return new ResponseEntity<>(korisnici, HttpStatus.OK);
@@ -67,7 +67,7 @@ public class KorisnikController {
     }
 
     @DeleteMapping("/users/{id}")
-    public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") long id) {
+    public ResponseEntity<HttpStatus> deleteKorisnik(@PathVariable("id") long id) {
         try {
             korisnikService.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -77,7 +77,7 @@ public class KorisnikController {
     }
 
     @DeleteMapping("/users")
-    public ResponseEntity<HttpStatus> deleteAllKorisniks() {
+    public ResponseEntity<HttpStatus> deleteAllKorisnici() {
         try {
             korisnikService.deleteAll();
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
