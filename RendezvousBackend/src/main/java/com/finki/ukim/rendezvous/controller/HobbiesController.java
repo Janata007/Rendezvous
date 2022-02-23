@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/hobbiesApi")
 public class HobbiesController {
     @Autowired
     private HobbiesService hobbiesService;
@@ -29,7 +29,7 @@ public class HobbiesController {
         return new ResponseEntity<>(hobbies, HttpStatus.OK);
     }
 
-    @GetMapping("/hobbies")
+    @GetMapping("/korisnikHobbies")
     public ResponseEntity<List<Hobbies>> getHobbieByKorisnik(@RequestBody Korisnik korisnik) {
         List<Hobbies> hobbiesData = hobbiesService.findByKorisnik(korisnik);
         if (!hobbiesData.isEmpty()) {

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/locationsApi")
 public class LocationsController {
     @Autowired
     private LocationsService locationsService;
@@ -29,7 +29,7 @@ public class LocationsController {
         return new ResponseEntity<>(locations, HttpStatus.OK);
     }
 
-    @GetMapping("/locations")
+    @GetMapping("/korisnikLocations")
     public ResponseEntity<List<Locations>> getLocationsByKorisnik(@RequestBody Korisnik korisnik) {
         List<Locations> locationsData = locationsService.findByKorisnik(korisnik);
         if (!locationsData.isEmpty()) {
