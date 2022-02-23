@@ -21,4 +21,16 @@ public class SportsService {
         return this.sportsRepository.findByKorisnik(korisnik);
     }
 
+    public Sports save(Sports s) {
+        return this.sportsRepository.save(s);
+    }
+
+    public void deleteById(long id) {
+        this.sportsRepository.deleteById(id);
+    }
+
+    public void deleteAll() {
+        this.sportsRepository.deleteAll();
+    }
+
 }
