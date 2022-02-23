@@ -11,22 +11,31 @@ public class LikesService {
     @Autowired
     private LikesRepository likesRepository;
 
-    public List<Likes> findAll(){
+    public List<Likes> findAll() {
         return this.likesRepository.findAll();
     }
 
-    public List<Likes> findAllByMainUserId(long id){
+    public List<Likes> findAllByMainUserId(long id) {
         return this.likesRepository.findAllByMainUserId(id);
     }
 
-    public List<Likes> findAllLiked(long id){
+    public List<Likes> findAllLiked(long id) {
         return this.likesRepository.findAllByIsLikedAndMainUserId(true, id);
     }
-    public List<Likes> findAllDisiked(long id){
-        return this.likesRepository.findAllByIsLikedAndMainUserId(false, id);
+
+    public List<Likes> findAllDisiked(long id) {
+        return this.likesRepository.findAllByIsLikedAndIsPlusUltraLikedAndMainUserId(false, false, id);
     }
 
-    public List<Likes> findAllPlusUltraLiked(long id){
+    public List<Likes> findAllPlusUltraLiked(long id) {
         return this.likesRepository.findAllByIsPlusUltraLikedAndMainUserId(true, id);
+    }
+
+    public List<Likes> findAllByIsLikedAndLikedUserId(long id) {
+        return this.likesRepository.findAllByIsLikedAndLikedUserId(true, id);
+    }
+
+    public List<Likes> findAllByIsPlusUltraLikedAndLikedUserId(long id) {
+        return this.likesRepository.findAllByIsPlusUltraLikedAndLikedUserId(true, id);
     }
 }

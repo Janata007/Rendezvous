@@ -9,4 +9,7 @@ public interface LikesRepository extends JpaRepository<Likes, Long> {
     List<Likes> findAllByMainUserId(long id);
     List<Likes> findAllByIsLikedAndMainUserId(boolean isLiked, long id);
     List<Likes> findAllByIsPlusUltraLikedAndMainUserId(boolean isLiked,long id);
+    List<Likes> findAllByIsLikedAndLikedUserId(boolean isLiked, long id);
+    List<Likes> findAllByIsLikedAndIsPlusUltraLikedAndMainUserId(boolean isLiked, boolean isPlusUltraLiked, long id);
+    List<Likes> findAllByIsPlusUltraLikedAndLikedUserId(boolean isPlusUltraLiked, long id);
 }
