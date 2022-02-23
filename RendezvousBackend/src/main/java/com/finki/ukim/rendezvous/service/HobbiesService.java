@@ -18,7 +18,7 @@ public class HobbiesService {
         return this.hobbiesRepository.findAll();
     }
 
-    public Optional<Hobbies> findByKorisnik(Korisnik korisnik) {
+    public List<Hobbies> findByKorisnik(Korisnik korisnik) {
         return this.hobbiesRepository.findByKorisnik(korisnik);
     }
 

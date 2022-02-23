@@ -1,5 +1,6 @@
 package com.finki.ukim.rendezvous.repository;
 
+import com.finki.ukim.rendezvous.model.Korisnik;
 import com.finki.ukim.rendezvous.model.Locations;
 import java.util.List;
 import java.util.Optional;
@@ -9,4 +10,6 @@ public interface LocationsRepository extends JpaRepository<Locations, Long> {
     List<Locations> findAll();
 
     Optional<Locations> findById(long id);
+
+    List<Locations> findByKorisnik(Korisnik korisnik);
 }
