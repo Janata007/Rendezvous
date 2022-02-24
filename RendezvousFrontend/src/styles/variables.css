@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap");
+
 /*? VARIABLES (SUBJECT TO CHANGE) */
 
 :root {
@@ -15,6 +17,11 @@
   --icon: 30px;
 
   /** COLORS */
+
+  --main-light: white;
+  --main-dark: #202020;
+  --accent-light: #d6d6d6;
+  --accent-dark: #333533;
 
   /** PADDINGS & MARGINS */
   --s-padding: 0.25em;
