@@ -10,8 +10,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LikesServiceImpl implements LikesService {
-    @Autowired
-    private LikesRepository likesRepository;
+    private final  LikesRepository likesRepository;
+
+    public LikesServiceImpl(LikesRepository likesRepository) {
+        this.likesRepository = likesRepository;
+    }
 
     public List<Likes> findAll() {
         return this.likesRepository.findAll();

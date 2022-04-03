@@ -2,7 +2,7 @@ package com.finki.ukim.rendezvous.controller;
 
 import com.finki.ukim.rendezvous.model.Korisnik;
 import com.finki.ukim.rendezvous.model.Sports;
-import com.finki.ukim.rendezvous.service.impl.SportsServiceImpl;
+import com.finki.ukim.rendezvous.service.SportsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,17 +14,22 @@ import java.util.List;
 @RestController
 @RequestMapping("/sportsApi")
 public class SportsController {
-    @Autowired
-    private SportsServiceImpl sportsService;
+
+    private final SportsService sportsService;
+
+    public SportsController(SportsService sportsService) {
+        this.sportsService = sportsService;
+    }
+
     @GetMapping("/sports")
     public ResponseEntity<List<Sports>> getAllSports() {
         List<Sports> sports = new ArrayList<>();
-        sports = sportsService.findAll();
+        sports = this.sportsService.findAll();
         return new ResponseEntity<>(sports, HttpStatus.OK);
     }
     @GetMapping("/korisnikSports")
     public ResponseEntity<List<Sports>> getSportsbyKorisnik(@RequestBody Korisnik korisnik) {
-        List<Sports> sportsData = sportsService.findByKorisnik(korisnik);
+        List<Sports> sportsData = this.sportsService.findByKorisnik(korisnik);
         if (!sportsData.isEmpty()) {
             return new ResponseEntity<List<Sports>>(sportsData, HttpStatus.OK);
         } else {
@@ -34,7 +39,7 @@ public class SportsController {
     @PostMapping("/sports")
     public ResponseEntity<Sports> createSports(@RequestBody Sports sports) {
         try {
-            Sports _sports = sportsService
+            Sports _sports = this.sportsService
                     .save(new Sports(sports.getSport(), sports.getKorisnik()));
             return new ResponseEntity<>(_sports, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -44,7 +49,7 @@ public class SportsController {
     @DeleteMapping("/sports/{id}")
     public ResponseEntity<HttpStatus> deleteSport(@PathVariable("id") long id) {
         try {
-            sportsService.deleteById(id);
+            this.sportsService.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -53,7 +58,7 @@ public class SportsController {
     @DeleteMapping("/sports")
     public ResponseEntity<HttpStatus> deleteAllSports() {
         try {
-            sportsService.deleteAll();
+            this.sportsService.deleteAll();
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

@@ -11,8 +11,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class KorisnikServiceImpl implements KorisnikService {
-    @Autowired
-    KorisnikRepository korisnikRepository;
+
+    private final KorisnikRepository korisnikRepository;
+
+    public KorisnikServiceImpl(KorisnikRepository korisnikRepository) {
+        this.korisnikRepository = korisnikRepository;
+    }
 
     public List<Korisnik> findAll() {
         return this.korisnikRepository.findAll();

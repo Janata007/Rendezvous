@@ -2,7 +2,8 @@ package com.finki.ukim.rendezvous.controller;
 
 import com.finki.ukim.rendezvous.model.Hobbies;
 import com.finki.ukim.rendezvous.model.Korisnik;
-import com.finki.ukim.rendezvous.service.impl.HobbiesServiceImpl;
+import com.finki.ukim.rendezvous.service.HobbiesService;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,19 +20,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/hobbiesApi")
 public class HobbiesController {
-    @Autowired
-    private HobbiesServiceImpl hobbiesService;
+    private final HobbiesService hobbiesService;
+
+    public HobbiesController(HobbiesService hobbiesService) {
+        this.hobbiesService = hobbiesService;
+    }
 
     @GetMapping("/hobbies")
     public ResponseEntity<List<Hobbies>> getAllHobbies() {
         List<Hobbies> hobbies = new ArrayList<>();
-        hobbies = hobbiesService.findAll();
+        hobbies = this.hobbiesService.findAll();
         return new ResponseEntity<>(hobbies, HttpStatus.OK);
     }
 
     @GetMapping("/korisnikHobbies")
     public ResponseEntity<List<Hobbies>> getHobbieByKorisnik(@RequestBody Korisnik korisnik) {
-        List<Hobbies> hobbiesData = hobbiesService.findByKorisnik(korisnik);
+        List<Hobbies> hobbiesData = this.hobbiesService.findByKorisnik(korisnik);
         if (!hobbiesData.isEmpty()) {
             return new ResponseEntity<List<Hobbies>>(hobbiesData, HttpStatus.OK);
         } else {
@@ -42,7 +46,7 @@ public class HobbiesController {
     @PostMapping("/hobbies")
     public ResponseEntity<Hobbies> createHobbies(@RequestBody Hobbies hobbies) {
         try {
-            Hobbies _hobbies = hobbiesService
+            Hobbies _hobbies = this.hobbiesService
                 .save(new Hobbies(hobbies.getHobby(), hobbies.getKorisnik()));
             return new ResponseEntity<>(_hobbies, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -53,7 +57,7 @@ public class HobbiesController {
     @DeleteMapping("/hobbies/{id}")
     public ResponseEntity<HttpStatus> deleteHobby(@PathVariable("id") long id) {
         try {
-            hobbiesService.deleteById(id);
+            this.hobbiesService.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -63,7 +67,7 @@ public class HobbiesController {
     @DeleteMapping("/hobbies")
     public ResponseEntity<HttpStatus> deleteAllHobbies() {
         try {
-            hobbiesService.deleteAll();
+            this.hobbiesService.deleteAll();
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

@@ -12,8 +12,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class HobbiesServiceImpl implements HobbiesService {
 
-    @Autowired
-    HobbiesRepository hobbiesRepository;
+    private final HobbiesRepository hobbiesRepository;
+
+    public HobbiesServiceImpl(HobbiesRepository hobbiesRepository) {
+        this.hobbiesRepository = hobbiesRepository;
+    }
 
     public List<Hobbies> findAll() {
         return this.hobbiesRepository.findAll();

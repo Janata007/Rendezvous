@@ -11,8 +11,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LocationsServiceImpl implements LocationsService {
-    @Autowired
-    private LocationsRepository locationsRepository;
+
+    private final  LocationsRepository locationsRepository;
+
+    public LocationsServiceImpl(LocationsRepository locationsRepository) {
+        this.locationsRepository = locationsRepository;
+    }
 
     public List<Locations> findAll() {
         return locationsRepository.findAll();

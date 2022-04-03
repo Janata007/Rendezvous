@@ -35,6 +35,7 @@ public class Korisnik implements UserDetails {
     private String password;
 
     private String city;
+
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
 

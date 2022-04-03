@@ -1,7 +1,8 @@
 package com.finki.ukim.rendezvous.controller;
 
 import com.finki.ukim.rendezvous.model.Korisnik;
-import com.finki.ukim.rendezvous.service.impl.KorisnikServiceImpl;
+import com.finki.ukim.rendezvous.service.KorisnikService;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,19 +15,22 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/korisniciApi")
 public class KorisnikController {
-    @Autowired
-    KorisnikServiceImpl korisnikService;
+    private final KorisnikService korisnikService;
+
+    public KorisnikController(KorisnikService korisnikService) {
+        this.korisnikService = korisnikService;
+    }
 
     @GetMapping("/users")
     public ResponseEntity<List<Korisnik>> getAllKorisnici() {
         List<Korisnik> korisnici = new ArrayList<>();
-        korisnici = korisnikService.findAll();
+        korisnici =this. korisnikService.findAll();
         return new ResponseEntity<>(korisnici, HttpStatus.OK);
     }
 
     @GetMapping("/users/{id}")
     public ResponseEntity<Korisnik> getKorisnikById(@PathVariable("id") long id) {
-        Optional<Korisnik> korisnikData = korisnikService.findById(id);
+        Optional<Korisnik> korisnikData = this.korisnikService.findById(id);
         if (korisnikData.isPresent()) {
             return new ResponseEntity<>(korisnikData.get(), HttpStatus.OK);
         } else {
@@ -37,7 +41,7 @@ public class KorisnikController {
     @PostMapping("/users")
     public ResponseEntity<Korisnik> createKorisnik(@RequestBody Korisnik korisnik) {
         try {
-            Korisnik _korisnik = korisnikService
+            Korisnik _korisnik = this.korisnikService
                 .save(new Korisnik(korisnik.getName(), korisnik.getSurname(), korisnik.getDateOfBirth(), korisnik.getAppUserRole(), korisnik.getLocked(), korisnik.getEnabled()));
             return new ResponseEntity<>(_korisnik, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -47,7 +51,7 @@ public class KorisnikController {
 
     @PutMapping("/users/{id}")
     public ResponseEntity<Korisnik> updateTutorial(@PathVariable("id") long id, @RequestBody Korisnik korisnik) {
-        Optional<Korisnik> korisnikData = korisnikService.findById(id);
+        Optional<Korisnik> korisnikData = this.korisnikService.findById(id);
         if (korisnikData.isPresent()) {
             Korisnik _korisnik = korisnikData.get();
             _korisnik.setName(korisnik.getName());
@@ -63,7 +67,7 @@ public class KorisnikController {
     @DeleteMapping("/users/{id}")
     public ResponseEntity<HttpStatus> deleteKorisnik(@PathVariable("id") long id) {
         try {
-            korisnikService.deleteById(id);
+            this.korisnikService.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -73,7 +77,7 @@ public class KorisnikController {
     @DeleteMapping("/users")
     public ResponseEntity<HttpStatus> deleteAllKorisnici() {
         try {
-            korisnikService.deleteAll();
+            this.korisnikService.deleteAll();
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

@@ -3,15 +3,18 @@ package com.finki.ukim.rendezvous.service.impl;
 import com.finki.ukim.rendezvous.model.Korisnik;
 import com.finki.ukim.rendezvous.model.Sports;
 import com.finki.ukim.rendezvous.repository.SportsRepository;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class SportsServiceImpl {
-    @Autowired
-    private SportsRepository sportsRepository;
+
+    private final SportsRepository sportsRepository;
+
+    public SportsServiceImpl(SportsRepository sportsRepository) {
+        this.sportsRepository = sportsRepository;
+    }
 
     public List<Sports> findAll() {
         return this.sportsRepository.findAll();
