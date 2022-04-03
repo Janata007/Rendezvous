@@ -1,7 +1,7 @@
 package com.finki.ukim.rendezvous.controller;
 
 import com.finki.ukim.rendezvous.model.Likes;
-import com.finki.ukim.rendezvous.service.LikesService;
+import com.finki.ukim.rendezvous.service.impl.LikesServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/likesApi")
 public class LikesController {
     @Autowired
-    private LikesService likesService;
+    private LikesServiceImpl likesService;
 
     @GetMapping("/allLikeTypes/{id}")
     public ResponseEntity<List<Likes>> getAllLikeTypesForUser(@PathVariable("id") long id) {

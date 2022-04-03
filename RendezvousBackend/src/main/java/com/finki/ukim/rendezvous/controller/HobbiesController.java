@@ -2,7 +2,7 @@ package com.finki.ukim.rendezvous.controller;
 
 import com.finki.ukim.rendezvous.model.Hobbies;
 import com.finki.ukim.rendezvous.model.Korisnik;
-import com.finki.ukim.rendezvous.service.HobbiesService;
+import com.finki.ukim.rendezvous.service.impl.HobbiesServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/hobbiesApi")
 public class HobbiesController {
     @Autowired
-    private HobbiesService hobbiesService;
+    private HobbiesServiceImpl hobbiesService;
 
     @GetMapping("/hobbies")
     public ResponseEntity<List<Hobbies>> getAllHobbies() {

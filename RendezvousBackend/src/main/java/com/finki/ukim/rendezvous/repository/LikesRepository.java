@@ -3,7 +3,9 @@ package com.finki.ukim.rendezvous.repository;
 import com.finki.ukim.rendezvous.model.Likes;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface LikesRepository extends JpaRepository<Likes, Long> {
     List<Likes> findAll();
     List<Likes> findAllByMainUserId(long id);

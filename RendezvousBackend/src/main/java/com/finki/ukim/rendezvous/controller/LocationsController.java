@@ -2,7 +2,7 @@ package com.finki.ukim.rendezvous.controller;
 
 import com.finki.ukim.rendezvous.model.Korisnik;
 import com.finki.ukim.rendezvous.model.Locations;
-import com.finki.ukim.rendezvous.service.LocationsService;
+import com.finki.ukim.rendezvous.service.impl.LocationsServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/locationsApi")
 public class LocationsController {
     @Autowired
-    private LocationsService locationsService;
+    private LocationsServiceImpl locationsService;
 
     @GetMapping("/locations")
     public ResponseEntity<List<Locations>> getAllLocations() {

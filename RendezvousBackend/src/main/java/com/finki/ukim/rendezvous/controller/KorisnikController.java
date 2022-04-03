@@ -1,7 +1,7 @@
 package com.finki.ukim.rendezvous.controller;
 
 import com.finki.ukim.rendezvous.model.Korisnik;
-import com.finki.ukim.rendezvous.service.KorisnikService;
+import com.finki.ukim.rendezvous.service.impl.KorisnikServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/korisniciApi")
 public class KorisnikController {
     @Autowired
-    KorisnikService korisnikService;
+    KorisnikServiceImpl korisnikService;
 
     @GetMapping("/users")
     public ResponseEntity<List<Korisnik>> getAllKorisnici() {
@@ -38,7 +38,7 @@ public class KorisnikController {
     public ResponseEntity<Korisnik> createKorisnik(@RequestBody Korisnik korisnik) {
         try {
             Korisnik _korisnik = korisnikService
-                .save(new Korisnik(korisnik.getName(), korisnik.getSurname(), korisnik.getDateOfBirth()));
+                .save(new Korisnik(korisnik.getName(), korisnik.getSurname(), korisnik.getDateOfBirth(), korisnik.getAppUserRole(), korisnik.getLocked(), korisnik.getEnabled()));
             return new ResponseEntity<>(_korisnik, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

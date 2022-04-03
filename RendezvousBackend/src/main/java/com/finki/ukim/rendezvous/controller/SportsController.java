@@ -1,10 +1,8 @@
 package com.finki.ukim.rendezvous.controller;
 
-import com.finki.ukim.rendezvous.model.Hobbies;
 import com.finki.ukim.rendezvous.model.Korisnik;
 import com.finki.ukim.rendezvous.model.Sports;
-import com.finki.ukim.rendezvous.service.HobbiesService;
-import com.finki.ukim.rendezvous.service.SportsService;
+import com.finki.ukim.rendezvous.service.impl.SportsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,13 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/sportsApi")
 public class SportsController {
     @Autowired
-    private SportsService sportsService;
+    private SportsServiceImpl sportsService;
     @GetMapping("/sports")
     public ResponseEntity<List<Sports>> getAllSports() {
         List<Sports> sports = new ArrayList<>();
