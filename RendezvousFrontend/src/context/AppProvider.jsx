@@ -1,7 +1,9 @@
 import { React, useReducer } from "react";
 import AppContext from "./app-context";
+import RendezvousService from "../repository/RendezvousRepository";
 
 export const defaultAppState = {
+  users: [],
   isLoggedIn: false,
 };
 
@@ -11,6 +13,8 @@ export const appReducer = (state, action) => {
       return { ...state, isLoggedIn: true };
     case "LOGOFF":
       return { ...state, isLoggedIn: false };
+    case "LOAD_USERS":
+      return { ...state, users: action.users };
     default:
       return defaultAppState;
   }
@@ -21,6 +25,7 @@ const AppProvider = ({ children }) => {
 
   const appContext = {
     isLoggedIn: appState.isLoggedIn,
+    users: appState.users,
     dispatch: dispatch,
   };
 
