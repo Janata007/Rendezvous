@@ -18,10 +18,10 @@
 
   /** COLORS */
 
-  --main-light: white;
-  --main-dark: #202020;
-  --accent-light: #d6d6d6;
-  --accent-dark: #333533;
+  --main-light: #f24a72;
+  --main-dark: #333c83;
+  --accent-light: #e7c990;
+  --accent-dark: #533721;
 
   /** PADDINGS & MARGINS */
   --s-padding: 0.25em;

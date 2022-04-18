@@ -1,6 +1,5 @@
 import { React, useReducer } from "react";
 import AppContext from "./app-context";
-import RendezvousService from "../repository/RendezvousRepository";
 
 export const defaultAppState = {
   users: [],
