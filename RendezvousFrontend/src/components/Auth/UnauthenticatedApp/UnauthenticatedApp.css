@@ -1,0 +1,12 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.app button {
+  width: 100%;
+  padding: var(--md-padding);
+  margin: var(--md-margin) 0;
+}
