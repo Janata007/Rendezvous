@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
@@ -18,28 +19,30 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
     private final AppUserService appUserService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    //    private final String uri = "/*";
-//
-//    @Override
-//    public void configure(final HttpSecurity http) throws Exception {
-//        http.csrf().disable();
-//        http.headers().httpStrictTransportSecurity().disable();
-//        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//
-//        // Authorize sub-folders permissions
-//        http.antMatcher(uri).authorizeRequests().anyRequest().permitAll();
-//    }
+        private final String uri = "/*";
+
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-            .csrf().disable()
-            .authorizeRequests()
-            .antMatchers("/*")
-            .permitAll()
-            .anyRequest()
-            .authenticated().and()
-            .formLogin();
+    public void configure(final HttpSecurity http) throws Exception {
+        http.csrf().disable();
+        http.headers().httpStrictTransportSecurity().disable();
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        // Authorize sub-folders permissions
+        http.antMatcher(uri).authorizeRequests().anyRequest().permitAll();
     }
+
+
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http
+//            .csrf().disable()
+//            .authorizeRequests()
+//            .antMatchers("/*")
+//            .permitAll()
+//            .anyRequest()
+//            .authenticated().and()
+//            .formLogin();
+//    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

@@ -22,9 +22,9 @@ public class HobbiesServiceImpl implements HobbiesService {
         return this.hobbiesRepository.findAll();
     }
 
-    public List<Hobbies> findByKorisnik(Korisnik korisnik) {
-        return this.hobbiesRepository.findByKorisnik(korisnik);
-    }
+//    public List<Hobbies> findByKorisnik(Korisnik korisnik) {
+//        return this.hobbiesRepository.findByKorisnik(korisnik);
+//    }
 
     public Hobbies save(Hobbies h) {
         return this.hobbiesRepository.save(h);

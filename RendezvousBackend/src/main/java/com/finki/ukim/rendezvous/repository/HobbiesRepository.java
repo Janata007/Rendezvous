@@ -10,6 +10,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface HobbiesRepository extends JpaRepository<Hobbies, Long> {
     List<Hobbies> findAll();
-
-    List<Hobbies> findByKorisnik(Korisnik korisnik);
+    //List<Hobbies> findByKorisnik(Korisnik korisnik);
 }

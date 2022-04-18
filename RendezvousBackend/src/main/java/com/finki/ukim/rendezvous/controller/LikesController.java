@@ -2,10 +2,9 @@ package com.finki.ukim.rendezvous.controller;
 
 import com.finki.ukim.rendezvous.model.Likes;
 import com.finki.ukim.rendezvous.service.LikesService;
-
+import com.finki.ukim.rendezvous.service.MatchService;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

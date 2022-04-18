@@ -28,7 +28,7 @@ public class Sports {
     @Enumerated(EnumType.STRING)
     @Column(name = "sport")
     private SportEnum sport;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "korisnik_id", nullable = false)
     Korisnik korisnik;
 

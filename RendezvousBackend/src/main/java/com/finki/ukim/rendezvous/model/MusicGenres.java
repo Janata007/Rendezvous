@@ -18,7 +18,7 @@ public class MusicGenres {
     @Enumerated(EnumType.STRING)
     @Column(name = "genre")
     private MusicGenreEnum musicGenre;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "korisnik_id", nullable = false)
     Korisnik korisnik;
 

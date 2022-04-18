@@ -1,22 +1,33 @@
 package com.finki.ukim.rendezvous.model;
 
 import com.finki.ukim.rendezvous.model.enums.AppUserRole;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.*;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.Set;
-
 @Entity
 @Data
+@Getter
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
@@ -30,6 +41,8 @@ public class Korisnik implements UserDetails {
 
     private String surname;
 
+    private String username;
+
     private String email;
 
     private String password;
@@ -41,10 +54,12 @@ public class Korisnik implements UserDetails {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "korisnik")
     private Set<Sports> sports;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "korisnik")
-    private Set<Hobbies> hobbies;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Hobbies> hobbies;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "korisnik")
     private Set<Locations> locations;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "korisnik")
+    private Set<MusicGenres> musicGenres;
     @Enumerated(EnumType.STRING)
     @Column(name = "user_role")
     private AppUserRole appUserRole;
@@ -52,14 +67,16 @@ public class Korisnik implements UserDetails {
     private Boolean enabled;
 
 
-    public Korisnik(String name, String surname, Date dateOfBirth, AppUserRole appUserRole, Boolean locked,
-                    Boolean enabled) {
+    public Korisnik(String password, String username, String name, String email, String surname, Date dateOfBirth, AppUserRole appUserRole) {
+        this.username = username;
         this.name = name;
+        this.password = password;
         this.surname = surname;
+        this.email = email;
         this.dateOfBirth = dateOfBirth;
         this.appUserRole = appUserRole;
-        this.locked = locked;
-        this.enabled = enabled;
+        this.locked = true;
+        this.enabled = true;
     }
 
     @Override
@@ -75,7 +92,7 @@ public class Korisnik implements UserDetails {
 
     @Override
     public String getUsername() {
-        return getUsername();
+        return username;
     }
 
     @Override

@@ -20,4 +20,5 @@ public enum MusicGenreEnum {
     OPERA,
     RNB,
     REGGAE,
+    HITS
 }

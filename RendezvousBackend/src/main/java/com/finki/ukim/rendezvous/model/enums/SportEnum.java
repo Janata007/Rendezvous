@@ -12,5 +12,6 @@ public enum SportEnum {
     VOLLEYBALL,
     HOCKEY,
     BASKETBALL,
-    BASEBALL
+    BASEBALL,
+    CHESS
 }

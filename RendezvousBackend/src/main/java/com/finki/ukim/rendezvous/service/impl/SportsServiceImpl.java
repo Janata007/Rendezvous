@@ -3,12 +3,13 @@ package com.finki.ukim.rendezvous.service.impl;
 import com.finki.ukim.rendezvous.model.Korisnik;
 import com.finki.ukim.rendezvous.model.Sports;
 import com.finki.ukim.rendezvous.repository.SportsRepository;
+import com.finki.ukim.rendezvous.service.SportsService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class SportsServiceImpl {
+public class SportsServiceImpl implements SportsService {
 
     private final SportsRepository sportsRepository;
 

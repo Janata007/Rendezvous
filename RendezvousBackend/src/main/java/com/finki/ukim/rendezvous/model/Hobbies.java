@@ -1,6 +1,8 @@
 package com.finki.ukim.rendezvous.model;
 
 import com.finki.ukim.rendezvous.model.enums.HobbyEnum;
+import com.finki.ukim.rendezvous.service.KorisnikService;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -28,13 +30,12 @@ public class Hobbies {
     @Enumerated(EnumType.STRING)
     @Column(name = "hobby")
     private HobbyEnum hobby;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "korisnik_id", nullable = false)
-    Korisnik korisnik;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "korisnik_id",  referencedColumnName = "id",nullable = false)
+//    Korisnik korisnik;
 
-    public Hobbies(HobbyEnum hobby, Korisnik korisnik) {
+    public Hobbies(HobbyEnum hobby) {
         this.hobby = hobby;
-        this.korisnik = korisnik;
+        //this.korisnik = korisnik;
     }
-
 }

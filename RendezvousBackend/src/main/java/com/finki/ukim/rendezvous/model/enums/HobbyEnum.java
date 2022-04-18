@@ -15,5 +15,8 @@ public enum HobbyEnum {
     TRAVELING,
     MOVIES,
     BOARD_GAMES,
-    PARTYING
+    PARTYING,
+    WALKS,
+    WRITING,
+    SHOPPING,
 }
