@@ -17,11 +17,11 @@ public class MatchController {
         this.matchService = matchService;
     }
 
-//    @GetMapping("/hobbiesPercent/")
-//    public ResponseEntity<String> getHobbiesMatchPercent(@RequestParam("id1") long id1, @RequestParam("id2") long id2) {
-//        String percent = this.matchService.hobbiesPercentMatch(id1, id2);
-//        return new ResponseEntity<String>(percent, HttpStatus.OK);
-//    }
+    @GetMapping("/hobbiesPercent/")
+    public ResponseEntity<String> getHobbiesMatchPercent(@RequestParam("id1") long id1, @RequestParam("id2") long id2) {
+        String percent = this.matchService.hobbiesPercentMatch(id1, id2);
+        return new ResponseEntity<String>(percent, HttpStatus.OK);
+    }
 
     @GetMapping("/locationsPercent/")
     public ResponseEntity<String> getLocationsMatchPercent(@RequestParam("id1") long id1,
