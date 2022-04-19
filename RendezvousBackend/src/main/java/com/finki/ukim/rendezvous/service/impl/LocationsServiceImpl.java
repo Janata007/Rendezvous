@@ -6,6 +6,7 @@ import com.finki.ukim.rendezvous.repository.LocationsRepository;
 import java.util.List;
 
 import com.finki.ukim.rendezvous.service.LocationsService;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,9 @@ public class LocationsServiceImpl implements LocationsService {
         return locationsRepository.findAll();
     }
 
-    public List<Locations> findByKorisnik(Korisnik korisnik) {
-        return this.locationsRepository.findByKorisnik(korisnik);
+    @Override
+    public Optional<Locations> findById(long id) {
+        return this.locationsRepository.findById(id);
     }
     public Locations save(Locations l) {
         return this.locationsRepository.save(l);
