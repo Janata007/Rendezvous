@@ -93,8 +93,7 @@ public class MatchService {
         Double percent = 0.0;
         Korisnik korisnik1 = this.korisnikService.findById(id1).orElseThrow(() -> new UserNotFoundException(id1));
         Korisnik korisnik2 = this.korisnikService.findById(id2).orElseThrow(() -> new UserNotFoundException(id2));
-        //Double hobbiesP = Double.parseDouble(this.hobbiesPercentMatch(id1, id2));
-        Double hobbiesP = 0.0;
+        Double hobbiesP = Double.parseDouble(this.hobbiesPercentMatch(id1, id2));
         Double locationP = Double.parseDouble(this.locationsPercentMatch(id1, id2));
         Double musicP = Double.parseDouble(this.musicPercentMatch(id1, id2));
         Double sportP = Double.parseDouble(this.sportPercentMatch(id1, id2));
