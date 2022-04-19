@@ -58,26 +58,33 @@ public class LikesController {
     }
 
     @PostMapping("/user/{mainId}/likes/{likesId}")
-    public ResponseEntity<String> userLikesUser(@PathVariable long mainId, @PathVariable long likesId) {
+    public ResponseEntity<Likes> userLikesUser(@PathVariable long mainId, @PathVariable long likesId) {
         this.korisnikService.findById(mainId).orElseThrow(() -> new UserNotFoundException(mainId));
         this.korisnikService.findById(likesId).orElseThrow(() -> new UserNotFoundException(likesId));
-        this.likesService.userLikesUser(mainId, likesId);
-        return new ResponseEntity<String>("success", HttpStatus.OK);
+        Likes likes = this.likesService.userLikesUser(mainId, likesId);
+        return new ResponseEntity<Likes>(likes, HttpStatus.OK);
     }
 
     @PostMapping("/user/{mainId}/plusUltraLikes/{likesId}")
-    public ResponseEntity<String> userPlusUltraLikesUser(@PathVariable long mainId, @PathVariable long likesId) {
+    public ResponseEntity<Likes> userPlusUltraLikesUser(@PathVariable long mainId, @PathVariable long likesId) {
         this.korisnikService.findById(mainId).orElseThrow(() -> new UserNotFoundException(mainId));
         this.korisnikService.findById(likesId).orElseThrow(() -> new UserNotFoundException(likesId));
-        this.likesService.userPlusUltraLikesUser(mainId, likesId);
-        return new ResponseEntity<String>("success", HttpStatus.OK);
+        Likes likes = this.likesService.userPlusUltraLikesUser(mainId, likesId);
+        return new ResponseEntity<Likes>(likes, HttpStatus.OK);
     }
 
     @PostMapping("/user/{mainId}/dislikes/{likesId}")
-    public ResponseEntity<String> userDislikesUser(@PathVariable long mainId, @PathVariable long likesId) {
+    public ResponseEntity<Likes> userDislikesUser(@PathVariable long mainId, @PathVariable long likesId) {
         this.korisnikService.findById(mainId).orElseThrow(() -> new UserNotFoundException(mainId));
         this.korisnikService.findById(likesId).orElseThrow(() -> new UserNotFoundException(likesId));
-        this.likesService.userDislikesUser(mainId, likesId);
-        return new ResponseEntity<String>("success", HttpStatus.OK);
+        Likes likes = this.likesService.userDislikesUser(mainId, likesId);
+        return new ResponseEntity<Likes>(likes, HttpStatus.OK);
+    }
+
+    @GetMapping("/user/{id}/isLiked")
+    public ResponseEntity<List<Likes>> getLikedUserLikes(@PathVariable long id) {
+        this.korisnikService.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+        List<Likes> likes = this.likesService.findAllByIsLikedAndLikedUserId(true, id);
+        return new ResponseEntity<List<Likes>>(likes, HttpStatus.OK);
     }
 }

@@ -52,4 +52,10 @@ public class LikesServiceImpl implements LikesService {
         Likes likes = new Likes(mainId, likesId, false, false);
         return this.likesRepository.save(likes);
     }
+
+    @Override
+    public List<Likes> findAllByIsLikedAndLikedUserId(boolean isLikes, long id) {
+        return this.likesRepository.findAllByIsLikedAndLikedUserId(isLikes, id);
+    }
+
 }

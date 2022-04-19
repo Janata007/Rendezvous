@@ -13,5 +13,6 @@ public interface LikesService {
     public Likes userLikesUser(long mainId, long likesId);
     public Likes userPlusUltraLikesUser(long mainId, long likesId);
     public Likes userDislikesUser(long mainId, long likesId);
+    public List<Likes> findAllByIsLikedAndLikedUserId(boolean isLikes, long id);
 
 }
