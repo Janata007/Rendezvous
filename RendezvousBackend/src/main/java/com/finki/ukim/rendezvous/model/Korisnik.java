@@ -4,9 +4,7 @@ import com.finki.ukim.rendezvous.model.enums.AppUserRole;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,7 +12,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -52,14 +52,31 @@ public class Korisnik implements UserDetails {
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "korisnik")
+    @ManyToMany
+    @JoinTable(name = "korisnici_sports",
+        joinColumns = @JoinColumn(name = "korisnik_id"),
+        inverseJoinColumns = @JoinColumn(name = "sport_id"))
     private Set<Sports> sports;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Hobbies> hobbies;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "korisnik")
+
+    @ManyToMany
+    @JoinTable(name = "korisnici_hobbies",
+        joinColumns = @JoinColumn(name = "korisnik_id"),
+        inverseJoinColumns = @JoinColumn(name = "hobby_id"))
+    private Set<Hobbies> hobbies;
+
+    @ManyToMany
+    @JoinTable(name = "korisnici_locations",
+        joinColumns = @JoinColumn(name = "korisnik_id"),
+        inverseJoinColumns = @JoinColumn(name = "location_id"))
     private Set<Locations> locations;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "korisnik")
+
+    @ManyToMany
+    @JoinTable(name = "korisnici_music_genres",
+        joinColumns = @JoinColumn(name = "korisnik_id"),
+        inverseJoinColumns = @JoinColumn(name = "music_genre_id"))
     private Set<MusicGenres> musicGenres;
+
+
     @Enumerated(EnumType.STRING)
     @Column(name = "user_role")
     private AppUserRole appUserRole;
@@ -67,7 +84,8 @@ public class Korisnik implements UserDetails {
     private Boolean enabled;
 
 
-    public Korisnik(String password, String username, String name, String email, String surname, Date dateOfBirth, AppUserRole appUserRole) {
+    public Korisnik(String password, String username, String name, String email, String surname, Date dateOfBirth,
+                    AppUserRole appUserRole) {
         this.username = username;
         this.name = name;
         this.password = password;
@@ -113,5 +131,21 @@ public class Korisnik implements UserDetails {
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+
+    public void addSport(Sports sport) {
+        sports.add(sport);
+    }
+
+    public void addHobby(Hobbies hobby) {
+        hobbies.add(hobby);
+    }
+
+    public void addLocation(Locations location) {
+        locations.add(location);
+    }
+
+    public void addMusicGenre(MusicGenres musicGenre) {
+        musicGenres.add(musicGenre);
     }
 }

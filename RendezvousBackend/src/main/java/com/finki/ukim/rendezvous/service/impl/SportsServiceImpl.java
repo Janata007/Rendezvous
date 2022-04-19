@@ -4,6 +4,7 @@ import com.finki.ukim.rendezvous.model.Korisnik;
 import com.finki.ukim.rendezvous.model.Sports;
 import com.finki.ukim.rendezvous.repository.SportsRepository;
 import com.finki.ukim.rendezvous.service.SportsService;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,16 +22,17 @@ public class SportsServiceImpl implements SportsService {
         return this.sportsRepository.findAll();
     }
 
-    public List<Sports> findByKorisnik(Korisnik korisnik) {
-        return this.sportsRepository.findByKorisnik(korisnik);
-    }
-
     public Sports save(Sports s) {
         return this.sportsRepository.save(s);
     }
 
     public void deleteById(long id) {
         this.sportsRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Sports> findById(long id) {
+        return this.sportsRepository.findById(id);
     }
 
     public void deleteAll() {

@@ -33,21 +33,11 @@ public class LocationsController {
         return new ResponseEntity<>(locations, HttpStatus.OK);
     }
 
-    @GetMapping("/korisnikLocations")
-    public ResponseEntity<List<Locations>> getLocationsByKorisnik(@RequestBody Korisnik korisnik) {
-        List<Locations> locationsData = locationsService.findByKorisnik(korisnik);
-        if (!locationsData.isEmpty()) {
-            return new ResponseEntity<List<Locations>>(locationsData, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
     @PostMapping("/locations")
     public ResponseEntity<Locations> createLocations(@RequestBody Locations locations) {
         try {
             Locations _locations = this.locationsService
-                .save(new Locations(locations.getLocation(), locations.getKorisnik()));
+                .save(new Locations(locations.getLocation()));
             return new ResponseEntity<>(_locations, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

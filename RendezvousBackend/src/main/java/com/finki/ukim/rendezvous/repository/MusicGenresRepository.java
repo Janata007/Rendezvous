@@ -7,5 +7,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface MusicGenresRepository extends JpaRepository<MusicGenres, Long> {
-    List<MusicGenres> findByKorisnik(Korisnik korisnik);
 }

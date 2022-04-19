@@ -6,7 +6,9 @@ import com.finki.ukim.rendezvous.model.Korisnik;
 import com.finki.ukim.rendezvous.model.Locations;
 import com.finki.ukim.rendezvous.model.MusicGenres;
 import com.finki.ukim.rendezvous.model.Sports;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,27 +29,27 @@ public class MatchService {
         this.sportsService = sportsService;
     }
 
-//    public String hobbiesPercentMatch(long id1, long id2) {
-//        Double percent = 0.0;
-//        Korisnik korisnik1 = this.korisnikService.findById(id1).orElseThrow(() -> new UserNotFoundException(id1));
-//        Korisnik korisnik2 = this.korisnikService.findById(id2).orElseThrow(() -> new UserNotFoundException(id2));
-//        List<Hobbies> korisnik1Hobbies = this.hobbiesService.findByKorisnik(korisnik1);
-//        List<Hobbies> korisnik2Hobbies = this.hobbiesService.findByKorisnik(korisnik2);
-//        for(Hobbies hobby1 : korisnik1Hobbies){
-//            for(Hobbies hobby2 : korisnik2Hobbies){
-//                if(hobby2.equals(hobby1)){
-//                    percent+= 5.5;
-//                }
-//            }
-//        }
-//        return percent.toString();
-//    }
+    public String hobbiesPercentMatch(long id1, long id2) {
+        Double percent = 0.0;
+        Korisnik korisnik1 = this.korisnikService.findById(id1).orElseThrow(() -> new UserNotFoundException(id1));
+        Korisnik korisnik2 = this.korisnikService.findById(id2).orElseThrow(() -> new UserNotFoundException(id2));
+        Set<Hobbies> korisnik1Hobbies = korisnik1.getHobbies();
+        Set<Hobbies> korisnik2Hobbies = korisnik2.getHobbies();
+        for(Hobbies hobby1 : korisnik1Hobbies){
+            for(Hobbies hobby2 : korisnik2Hobbies){
+                if(hobby2.equals(hobby1)){
+                    percent+= 5.5;
+                }
+            }
+        }
+        return percent.toString();
+    }
     public String locationsPercentMatch(long id1, long id2) {
         Double percent = 0.0;
         Korisnik korisnik1 = this.korisnikService.findById(id1).orElseThrow(() -> new UserNotFoundException(id1));
         Korisnik korisnik2 = this.korisnikService.findById(id2).orElseThrow(() -> new UserNotFoundException(id2));
-        List<Locations> korisnik1Locations = this.locationsService.findByKorisnik(korisnik1);
-        List<Locations> korisnik2Locations = this.locationsService.findByKorisnik(korisnik2);
+        Set<Locations> korisnik1Locations = korisnik1.getLocations();
+        Set<Locations> korisnik2Locations = korisnik2.getLocations();
         for(Locations location1 : korisnik1Locations){
             for(Locations location2 : korisnik2Locations){
                 if(location2.equals(location1)){
@@ -61,8 +63,8 @@ public class MatchService {
         Double percent = 0.0;
         Korisnik korisnik1 = this.korisnikService.findById(id1).orElseThrow(() -> new UserNotFoundException(id1));
         Korisnik korisnik2 = this.korisnikService.findById(id2).orElseThrow(() -> new UserNotFoundException(id2));
-        List<MusicGenres> korisnik1Music = this.musicGenreService.findByKorisnik(korisnik1);
-        List<MusicGenres> korisnik2Music = this.musicGenreService.findByKorisnik(korisnik2);
+        Set<MusicGenres> korisnik1Music = korisnik1.getMusicGenres();
+        Set<MusicGenres> korisnik2Music = korisnik2.getMusicGenres();
         for(MusicGenres music1 : korisnik1Music){
             for(MusicGenres music2 : korisnik2Music){
                 if(music2.equals(music1)){
@@ -76,8 +78,8 @@ public class MatchService {
         Double percent = 0.0;
         Korisnik korisnik1 = this.korisnikService.findById(id1).orElseThrow(() -> new UserNotFoundException(id1));
         Korisnik korisnik2 = this.korisnikService.findById(id2).orElseThrow(() -> new UserNotFoundException(id2));
-        List<Sports> korisnik1Sport = this.sportsService.findByKorisnik(korisnik1);
-        List<Sports> korisnik2Sport = this.sportsService.findByKorisnik(korisnik2);
+        Set<Sports> korisnik1Sport = korisnik1.getSports();
+        Set<Sports> korisnik2Sport = korisnik2.getSports();
         for(Sports sport1 : korisnik1Sport){
             for(Sports sport2 : korisnik2Sport){
                 if(sport2.equals(sport1)){

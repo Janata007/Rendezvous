@@ -12,6 +12,4 @@ public interface LocationsRepository extends JpaRepository<Locations, Long> {
     List<Locations> findAll();
 
     Optional<Locations> findById(long id);
-
-    List<Locations> findByKorisnik(Korisnik korisnik);
 }

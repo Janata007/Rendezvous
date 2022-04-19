@@ -1,12 +1,24 @@
 package com.finki.ukim.rendezvous.controller;
 
+import com.finki.ukim.rendezvous.exceptions.HobbyNotFoundException;
+import com.finki.ukim.rendezvous.exceptions.LocationNotFoundException;
+import com.finki.ukim.rendezvous.exceptions.MusicGenreNotFoundException;
+import com.finki.ukim.rendezvous.exceptions.SportNotFoundException;
+import com.finki.ukim.rendezvous.exceptions.UserNotFoundException;
 import com.finki.ukim.rendezvous.model.Hobbies;
 import com.finki.ukim.rendezvous.model.Korisnik;
+import com.finki.ukim.rendezvous.model.Locations;
+import com.finki.ukim.rendezvous.model.MusicGenres;
+import com.finki.ukim.rendezvous.model.Sports;
 import com.finki.ukim.rendezvous.service.HobbiesService;
 import com.finki.ukim.rendezvous.service.KorisnikService;
+import com.finki.ukim.rendezvous.service.LocationsService;
+import com.finki.ukim.rendezvous.service.MusicGenreService;
+import com.finki.ukim.rendezvous.service.SportsService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,10 +37,57 @@ import org.springframework.web.bind.annotation.RestController;
 public class KorisnikController {
     private final KorisnikService korisnikService;
     private final HobbiesService hobbiesService;
+    private final SportsService sportsService;
+    private final LocationsService locationsService;
+    private final MusicGenreService musicGenreService;
 
-    public KorisnikController(KorisnikService korisnikService, HobbiesService hobbiesService) {
+    public KorisnikController(KorisnikService korisnikService, MusicGenreService musicGenreService,
+                              SportsService sportsService,
+                              HobbiesService hobbiesService, LocationsService locationsService) {
         this.korisnikService = korisnikService;
         this.hobbiesService = hobbiesService;
+        this.sportsService = sportsService;
+        this.locationsService = locationsService;
+        this.musicGenreService = musicGenreService;
+    }
+
+    @PutMapping("/{korisnikId}/sports/{sportId}")
+    Korisnik addSportForUser(@PathVariable long sportId, @PathVariable long korisnikId) {
+        Sports sport = this.sportsService.findById(sportId).orElseThrow(() -> new SportNotFoundException(sportId));
+        Korisnik korisnik =
+            this.korisnikService.findById(korisnikId).orElseThrow(() -> new UserNotFoundException(korisnikId));
+        korisnik.addSport(sport);
+        System.out.println("KORISNIKOT: " + korisnik.getSports());
+        return this.korisnikService.save(korisnik);
+    }
+
+    @PutMapping("/{korisnikId}/hobbies/{hobbyId}")
+    Korisnik addHobbyForUser(@PathVariable long hobbyId, @PathVariable long korisnikId) {
+        Hobbies hobby = this.hobbiesService.findById(hobbyId).orElseThrow(() -> new HobbyNotFoundException(hobbyId));
+        Korisnik korisnik =
+            this.korisnikService.findById(korisnikId).orElseThrow(() -> new UserNotFoundException(korisnikId));
+        korisnik.addHobby(hobby);
+        return this.korisnikService.save(korisnik);
+    }
+
+    @PutMapping("/{korisnikId}/locations/{locationId}")
+    Korisnik addLocationForUser(@PathVariable long locationId, @PathVariable long korisnikId) {
+        Locations location =
+            this.locationsService.findById(locationId).orElseThrow(() -> new LocationNotFoundException(locationId));
+        Korisnik korisnik =
+            this.korisnikService.findById(korisnikId).orElseThrow(() -> new UserNotFoundException(korisnikId));
+        korisnik.addLocation(location);
+        return this.korisnikService.save(korisnik);
+    }
+
+    @PutMapping("/{korisnikId}/music/{musicId}")
+    Korisnik addMusicForUser(@PathVariable long musicId, @PathVariable long korisnikId) {
+        MusicGenres musicGenre =
+            this.musicGenreService.findById(musicId).orElseThrow(() -> new MusicGenreNotFoundException(musicId));
+        Korisnik korisnik =
+            this.korisnikService.findById(korisnikId).orElseThrow(() -> new UserNotFoundException(korisnikId));
+        korisnik.addMusicGenre(musicGenre);
+        return this.korisnikService.save(korisnik);
     }
 
     @GetMapping("/users")
@@ -43,6 +102,16 @@ public class KorisnikController {
         Optional<Korisnik> korisnikData = this.korisnikService.findById(id);
         if (korisnikData.isPresent()) {
             return new ResponseEntity<>(korisnikData.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/users/{id}/sports")
+    public ResponseEntity<Set<Sports>> getSportsForKorisnikById(@PathVariable("id") long id) {
+        Optional<Korisnik> korisnikData = this.korisnikService.findById(id);
+        if (korisnikData.isPresent()) {
+            return new ResponseEntity<Set<Sports>>(korisnikData.get().getSports(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -66,13 +135,13 @@ public class KorisnikController {
         Optional<Korisnik> korisnikData = this.korisnikService.findById(id);
         if (korisnikData.isPresent()) {
             Korisnik _korisnik = korisnikData.get();
-           List<Hobbies> currentHobbies = korisnikData.get().getHobbies();
-            for(Hobbies h : korisnik.getHobbies()){
-             for(Hobbies h2 : currentHobbies){
-                 if(!h2.getHobby().equals(h.getHobby())){
-                     System.out.println("HOBBIES: " + hobbiesService.findAll());
-                 }
-             }
+            Set<Hobbies> currentHobbies = korisnikData.get().getHobbies();
+            for (Hobbies h : korisnik.getHobbies()) {
+                for (Hobbies h2 : currentHobbies) {
+                    if (!h2.getHobby().equals(h.getHobby())) {
+                        System.out.println("HOBBIES: " + hobbiesService.findAll());
+                    }
+                }
             }
             _korisnik.setHobbies(korisnik.getHobbies());
             return new ResponseEntity<>(korisnikService.save(_korisnik), HttpStatus.OK);

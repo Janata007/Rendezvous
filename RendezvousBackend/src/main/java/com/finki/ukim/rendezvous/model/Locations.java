@@ -28,12 +28,7 @@ public class Locations {
     @Enumerated(EnumType.STRING)
     @Column(name = "location")
     private LocationEnum location;
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "korisnik_id", nullable = false)
-    Korisnik korisnik;
-
-    public Locations(LocationEnum location, Korisnik korisnik) {
+    public Locations(LocationEnum location) {
         this.location = location;
-        this.korisnik = korisnik;
     }
 }

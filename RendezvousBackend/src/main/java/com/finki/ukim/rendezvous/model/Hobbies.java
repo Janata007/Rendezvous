@@ -30,12 +30,7 @@ public class Hobbies {
     @Enumerated(EnumType.STRING)
     @Column(name = "hobby")
     private HobbyEnum hobby;
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "korisnik_id",  referencedColumnName = "id",nullable = false)
-//    Korisnik korisnik;
-
     public Hobbies(HobbyEnum hobby) {
         this.hobby = hobby;
-        //this.korisnik = korisnik;
     }
 }
