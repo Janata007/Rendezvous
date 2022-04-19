@@ -2,15 +2,14 @@ package com.finki.ukim.rendezvous.service.impl;
 
 import com.finki.ukim.rendezvous.model.Likes;
 import com.finki.ukim.rendezvous.repository.LikesRepository;
-import java.util.List;
-
+import com.finki.ukim.rendezvous.service.KorisnikService;
 import com.finki.ukim.rendezvous.service.LikesService;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
 public class LikesServiceImpl implements LikesService {
-    private final  LikesRepository likesRepository;
+    private final LikesRepository likesRepository;
 
     public LikesServiceImpl(LikesRepository likesRepository) {
         this.likesRepository = likesRepository;
@@ -36,11 +35,21 @@ public class LikesServiceImpl implements LikesService {
         return this.likesRepository.findAllByIsPlusUltraLikedAndMainUserId(true, id);
     }
 
-    public List<Likes> findAllByIsLikedAndLikedUserId(long id) {
-        return this.likesRepository.findAllByIsLikedAndLikedUserId(true, id);
+    @Override
+    public Likes userLikesUser(long mainId, long likesId) {
+        Likes likes = new Likes(mainId, likesId, true, false);
+        return this.likesRepository.save(likes);
     }
 
-    public List<Likes> findAllByIsPlusUltraLikedAndLikedUserId(long id) {
-        return this.likesRepository.findAllByIsPlusUltraLikedAndLikedUserId(true, id);
+    @Override
+    public Likes userPlusUltraLikesUser(long mainId, long likesId) {
+        Likes likes = new Likes(mainId, likesId, false, true);
+        return this.likesRepository.save(likes);
+    }
+
+    @Override
+    public Likes userDislikesUser(long mainId, long likesId) {
+        Likes likes = new Likes(mainId, likesId, false, false);
+        return this.likesRepository.save(likes);
     }
 }

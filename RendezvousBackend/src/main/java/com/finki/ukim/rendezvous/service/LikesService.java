@@ -10,7 +10,8 @@ public interface LikesService {
     public List<Likes> findAllLiked(long id);
     public List<Likes> findAllDisiked(long id);
     public List<Likes> findAllPlusUltraLiked(long id);
-    public List<Likes> findAllByIsLikedAndLikedUserId(long id);
-    public List<Likes> findAllByIsPlusUltraLikedAndLikedUserId(long id);
+    public Likes userLikesUser(long mainId, long likesId);
+    public Likes userPlusUltraLikesUser(long mainId, long likesId);
+    public Likes userDislikesUser(long mainId, long likesId);
 
 }
