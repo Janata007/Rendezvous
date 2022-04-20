@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.finki.ukim.rendezvous.service.KorisnikService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -36,5 +35,10 @@ public class KorisnikServiceImpl implements KorisnikService {
 
     public void deleteAll() {
         this.korisnikRepository.deleteAll();
+    }
+
+    @Override
+    public Optional<Korisnik> findByUsername(String username) {
+        return this.korisnikRepository.findByUsername(username);
     }
 }
