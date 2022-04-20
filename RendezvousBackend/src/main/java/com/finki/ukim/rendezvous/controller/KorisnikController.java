@@ -97,7 +97,7 @@ public class KorisnikController {
         }
     }
 
-    @GetMapping("/users/{username}")
+    @GetMapping("/users/username/{username}")
     public ResponseEntity<Korisnik> getUserByUsername(@PathVariable("username") String username) {
         Optional<Korisnik> korisnikData = this.korisnikService.findByUsername(username);
         if (korisnikData.isPresent()) {
