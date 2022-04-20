@@ -5,6 +5,10 @@ const RendezvousService = {
     return axios.get("/korisniciApi/users");
   },
 
+  fetchUserByUsername: (username) => {
+    return axios.get(`/korisniciApi/users/username/${username}`);
+  },
+
   createUser: () => {
     return axios.post("/korisniciApi/users", "");
   },

@@ -3,6 +3,7 @@ import AppContext from "./app-context";
 
 export const defaultAppState = {
   users: [],
+  username: "",
   isLoggedIn: false,
 };
 
