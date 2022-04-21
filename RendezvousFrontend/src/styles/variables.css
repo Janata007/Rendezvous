@@ -1,10 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap");
 /*? VARIABLES (SUBJECT TO CHANGE) */
 
 :root {
   /** FONT STYLES */
-  --montserrat: "Montserrat", sans-serif;
+  --rubik: "Rubik", sans-serif;
 
   --xs: 12px;
   --s: 14px;

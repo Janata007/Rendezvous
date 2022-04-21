@@ -1,0 +1,9 @@
+.card {
+  width: 100%;
+  height: fit-content;
+  padding: var(--md-padding);
+  background-color: var(--accent-light);
+  border: none;
+  border-radius: var(--s-radius);
+  box-shadow: 0 5px 5px 2px rgba(0, 0, 0, 0.25);
+}

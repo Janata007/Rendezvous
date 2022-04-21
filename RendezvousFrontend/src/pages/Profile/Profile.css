@@ -1,11 +1,6 @@
 .profile {
-  width: 100%;
-  height: 100%;
-  padding: var(--md-padding) 0;
-  background-color: var(--main-light);
-
   display: flex;
-  gap: var(--lg-margin);
+  gap: var(--md-margin);
   flex-direction: column;
   align-items: center;
 }
@@ -13,25 +8,31 @@
 .profile-pic {
   width: 100px;
   height: 100px;
-  background-color: white;
   border-radius: var(--circle);
+  border: solid 3px var(--accent-light);
+
+  background-image: url(../../assets/images/defaultProfilePic.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .personal {
+  width: 100%;
   text-align: center;
   color: var(--accent-light);
 }
 
 .username {
   display: block;
-  margin-bottom: var(--lg-margin);
+  margin-bottom: var(--md-margin);
   font-weight: bold;
 }
 
 .personal-row {
   display: flex;
-  gap: var(--xxl);
   justify-content: space-between;
+  color: var(--accent-dark);
 }
 
 .email,

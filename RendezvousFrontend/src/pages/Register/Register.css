@@ -1,9 +1,4 @@
 .register {
-  width: 100%;
-  height: 100%;
-  padding: var(--md-padding);
-  background-color: var(--main-light);
-
   display: flex;
   gap: var(--lg-margin);
   flex-direction: column;
@@ -11,33 +6,44 @@
   justify-content: center;
 }
 
-.logo {
-  width: 75%;
-  height: fit-content;
-}
-
 .register-form {
-  width: 75%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lg-margin);
+  padding-bottom: var(--lg-padding);
 }
 
 .register-input {
   width: 100%;
-  margin: var(--s-margin) 0;
-  padding: var(--s-padding) var(--md-padding);
-  border-radius: var(--s-radius);
-  font-size: var(--xl);
+  padding: var(--s-padding);
+
+  background-color: transparent;
+  border: none;
+  border-bottom: solid 2px var(--accent-dark);
+  outline: none;
+
+  font-size: var(--lg);
 }
 
-.btn {
-  width: 75%;
-  padding: var(--md-padding);
-  background-color: var(--accent-light);
-  border: none;
-  border-radius: var(--s-radius);
+.register-input::placeholder {
+  font-size: var(--md);
+  letter-spacing: 2px;
+  opacity: 0.4;
+}
 
-  color: var(--accent-dark);
-  font-size: var(--xl);
-  text-transform: uppercase;
+.form-group {
+  position: relative;
+}
 
-  box-shadow: inset 0 -0.6em 0 -0.35em rgba(0, 0, 0, 0.2);
+.form-group::after {
+  content: attr(data-error);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 110%;
+  left: var(--s-padding);
+
+  font-size: var(--s);
+  color: red;
+  opacity: 0;
 }
