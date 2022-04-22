@@ -6,7 +6,10 @@ const Button = ({ text, navigateTo }) => {
   let navigate = useNavigate();
 
   return (
-    <button className="button" onClick={() => navigate(`/${navigateTo}`)}>
+    <button
+      className="button nav-button"
+      onClick={() => navigate(`/${navigateTo}`)}
+    >
       {text}
     </button>
   );

@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import Button from "../../components/Helper/Button/Button";
+import Button from "../../components/Helper/Buttons/Button";
 import Card from "../../components/Helper/Card/Card";
 import logo from "../../assets/images/logo.png";
 import "../Pages.css";
@@ -60,10 +60,13 @@ const Register = () => {
               placeholder="Password"
             />
           </div>
+
+          <button type="submit" className="button submit-button">
+            Register
+          </button>
         </form>
       </Card>
 
-      <Button text="Register" />
       <Button text="Back to homepage" navigateTo="" />
     </div>
   );

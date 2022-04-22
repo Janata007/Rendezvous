@@ -1,0 +1,21 @@
+.button {
+  width: 100%;
+  padding: var(--md-padding);
+  border: none;
+  border-radius: var(--s-radius);
+
+  font-size: var(--xl);
+  text-transform: uppercase;
+}
+
+.nav-button {
+  background-color: var(--accent-light);
+  color: var(--accent-dark);
+  box-shadow: inset 0 -0.6em 0 -0.35em rgba(0, 0, 0, 0.2);
+}
+
+.submit-button {
+  background-color: var(--accent-dark);
+  color: var(--accent-light);
+  box-shadow: inset 0 -0.6em 0 -0.35em rgba(231, 201, 144, 0.2);
+}

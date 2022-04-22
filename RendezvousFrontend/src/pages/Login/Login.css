@@ -1,4 +1,4 @@
-.register {
+.login {
   display: flex;
   gap: var(--lg-margin);
   flex-direction: column;
@@ -6,13 +6,13 @@
   justify-content: center;
 }
 
-.register-form {
+.login-form {
   display: flex;
   flex-direction: column;
-  gap: var(--xl-margin);
+  gap: var(--lg-margin);
 }
 
-.register-input {
+.login-input {
   width: 100%;
   padding: var(--s-padding);
 
@@ -24,7 +24,7 @@
   font-size: var(--lg);
 }
 
-.register-input::placeholder {
+.login-input::placeholder {
   font-size: var(--md);
   letter-spacing: 2px;
   opacity: 0.4;
@@ -50,4 +50,15 @@
 
 .form-group.invalid::after {
   opacity: 1;
+}
+
+.login-error-message {
+  display: none;
+  font-size: var(--lg);
+  color: red;
+  text-align: center;
+}
+
+.login-error-message.invalid {
+  display: block;
 }

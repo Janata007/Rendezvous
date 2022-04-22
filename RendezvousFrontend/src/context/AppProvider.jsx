@@ -3,14 +3,20 @@ import AppContext from "./app-context";
 
 export const defaultAppState = {
   users: [],
-  username: "",
+  activeUser: {
+    username: "",
+    name: "",
+    surname: "",
+    email: "",
+    city: "",
+  },
   isLoggedIn: false,
 };
 
 export const appReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
-      return { ...state, isLoggedIn: true };
+      return { ...state, isLoggedIn: true, activeUser: { ...action.user } };
     case "LOGOFF":
       return { ...state, isLoggedIn: false };
     case "LOAD_USERS":
@@ -25,6 +31,7 @@ const AppProvider = ({ children }) => {
 
   const appContext = {
     isLoggedIn: appState.isLoggedIn,
+    activeUser: appState.activeUser,
     users: appState.users,
     dispatch: dispatch,
   };

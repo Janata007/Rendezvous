@@ -21,6 +21,7 @@
   --main-dark: #333c83;
   --accent-light: #e7c990;
   --accent-dark: #533721;
+  --accent-focus: #ffd700;
 
   /** PADDINGS & MARGINS */
   --s-padding: 0.25em;

@@ -1,14 +1,11 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import Button from "../../components/Helper/Button/Button";
 import Card from "../../components/Helper/Card/Card";
+import Button from "../../components/Helper/Buttons/Button";
 import logo from "../../assets/images/logo.png";
 import "../Pages.css";
 import "./NotFound.css";
 
 const NotFound = () => {
-  let navigate = useNavigate();
-
   return (
     <div className="not-found page">
       <img className="logo" src={logo} alt="rendezvous-logo" />

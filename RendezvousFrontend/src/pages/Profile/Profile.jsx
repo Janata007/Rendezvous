@@ -1,37 +1,21 @@
 import { React, useContext, useEffect, useState } from "react";
-import Button from "../../components/Helper/Button/Button";
+import Button from "../../components/Helper/Buttons/Button";
 import Card from "../../components/Helper/Card/Card";
 import AppContext from "../../context/app-context";
-import RendezvousService from "../../repository/RendezvousRepository";
 import "./Profile.css";
 const Profile = () => {
   const appContext = useContext(AppContext);
 
   const [user, setUser] = useState({
-    name: "",
-    surname: "",
-    username: "",
-    email: "",
-    city: "",
+    username: appContext.activeUser.username,
+    name: appContext.activeUser.name,
+    surname: appContext.activeUser.surname,
   });
 
   useEffect(() => {
-    RendezvousService.fetchUserByUsername("Marko")
-      .then((response) => {
-        return response;
-      })
-      .then((data) => {
-        return data.data;
-      })
-      .then((userInfo) => {
-        setUser({
-          name: userInfo.name,
-          surname: userInfo.surname,
-          username: userInfo.username,
-          email: userInfo.email,
-          city: userInfo.city,
-        });
-      });
+    setUser({
+      ...appContext.activeUser,
+    });
   }, [appContext]);
 
   return (
@@ -40,7 +24,7 @@ const Profile = () => {
 
       <section className="personal">
         <h2 className="name">
-          {user.name} {user.surname}
+          {appContext.activeUser.name} {appContext.activeUser.surname}
         </h2>
 
         <span className="username">( {user.username} )</span>
