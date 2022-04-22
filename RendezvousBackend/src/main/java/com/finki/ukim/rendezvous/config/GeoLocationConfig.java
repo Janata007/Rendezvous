@@ -30,7 +30,7 @@ public class GeoLocationConfig {
         try {
             log.info("GeoLocationConfig: Trying to load GeoLite2-Country database...");
 
-            Resource resource = resourceLoader.getResource("classpath:maxmind/GeoLite2-City.mmdb");
+            Resource resource = resourceLoader.getResource("classpath:geolite2/GeoLite2-City.mmdb");
             InputStream dbAsStream = resource.getInputStream();
 
             log.info("GeoLocationConfig: Database was loaded successfully.");

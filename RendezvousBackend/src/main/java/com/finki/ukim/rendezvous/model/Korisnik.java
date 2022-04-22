@@ -49,6 +49,8 @@ public class Korisnik implements UserDetails {
 
     private String city;
 
+    private String ipAddress;
+
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
 
