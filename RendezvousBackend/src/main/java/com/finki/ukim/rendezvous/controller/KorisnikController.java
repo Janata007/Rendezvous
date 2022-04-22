@@ -3,10 +3,13 @@ package com.finki.ukim.rendezvous.controller;
 import com.finki.ukim.rendezvous.exceptions.*;
 import com.finki.ukim.rendezvous.model.*;
 import com.finki.ukim.rendezvous.service.*;
+import com.maxmind.geoip2.exception.GeoIp2Exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -164,5 +167,10 @@ public class KorisnikController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+    @GetMapping("/geoIP/{ipAddress}")
+    public Korisnik getLocation(@PathVariable String ipAddress, HttpServletRequest request
+    ) throws IOException, GeoIp2Exception {
+        return korisnikService.getIpLocation(ipAddress, request);
     }
 }
