@@ -15,6 +15,7 @@ public interface KorisnikService {
     public void deleteById(long id);
     public void deleteAll();
     public Optional<Korisnik> findByUsername(String username);
+    String getClientIp(HttpServletRequest request);
 
-    Korisnik getIpLocation(String ip, HttpServletRequest request) throws IOException, GeoIp2Exception;
+    String getIpLocation(String ip, HttpServletRequest request) throws IOException, GeoIp2Exception;
 }
