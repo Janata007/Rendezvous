@@ -5,3 +5,8 @@
   align-items: center;
   justify-content: center;
 }
+
+.home-loggedIn {
+  justify-content: space-between;
+  padding: 0;
+}

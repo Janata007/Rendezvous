@@ -9,6 +9,8 @@ export const defaultAppState = {
     surname: "",
     email: "",
     city: "",
+    hobbies: [],
+    sports: [],
   },
   isLoggedIn: false,
 };
@@ -17,8 +19,20 @@ export const appReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
       return { ...state, isLoggedIn: true, activeUser: { ...action.user } };
-    case "LOGOFF":
-      return { ...state, isLoggedIn: false };
+    case "LOGOUT":
+      return {
+        ...state,
+        isLoggedIn: false,
+        activeUser: {
+          username: "",
+          name: "",
+          surname: "",
+          email: "",
+          city: "",
+          hobbies: [],
+          sports: [],
+        },
+      };
     case "LOAD_USERS":
       return { ...state, users: action.users };
     default:

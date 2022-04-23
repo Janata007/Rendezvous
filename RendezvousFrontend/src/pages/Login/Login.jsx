@@ -1,4 +1,5 @@
 import { React, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import RendezvousService from "../../repository/RendezvousRepository";
 import AppContext from "../../context/app-context";
 import Card from "../../components/Helper/Card/Card";
@@ -6,7 +7,6 @@ import logo from "../../assets/images/logo.png";
 import Button from "../../components/Helper/Buttons/Button";
 import "../Pages.css";
 import "./Login.css";
-import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const appContext = useContext(AppContext);
@@ -58,6 +58,8 @@ const Login = () => {
                 surname: data.surname,
                 email: data.email,
                 city: data.city,
+                hobbies: data.hobbies,
+                sports: data.sports,
               },
             });
             navigate("/profile");

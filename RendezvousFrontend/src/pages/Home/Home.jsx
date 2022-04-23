@@ -8,10 +8,12 @@ import Unauthenticated from "./Unauthenticated";
 const Home = () => {
   const appContext = useContext(AppContext);
 
-  useEffect(() => {}, [appContext]);
+  useEffect(() => {}, [appContext.isLoggedIn]);
 
   return (
-    <div className="home page">
+    <div
+      className={`home page ${appContext.isLoggedIn ? "home-loggedIn" : ""}`}
+    >
       {appContext.isLoggedIn ? <Authenticated /> : <Unauthenticated />}
     </div>
   );

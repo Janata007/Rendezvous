@@ -1,6 +1,8 @@
 import { React, useContext, useEffect, useState } from "react";
 import Button from "../../components/Helper/Buttons/Button";
 import Card from "../../components/Helper/Card/Card";
+import Hobbies from "../../components/Lists/Hobbies";
+import Sports from "../../components/Lists/Sports";
 import AppContext from "../../context/app-context";
 import "./Profile.css";
 const Profile = () => {
@@ -10,13 +12,17 @@ const Profile = () => {
     username: appContext.activeUser.username,
     name: appContext.activeUser.name,
     surname: appContext.activeUser.surname,
+    email: appContext.activeUser.email,
+    city: appContext.activeUser.city,
   });
 
   useEffect(() => {
     setUser({
       ...appContext.activeUser,
     });
-  }, [appContext]);
+
+    return () => {};
+  }, [appContext.activeUser]);
 
   return (
     <div className="profile page">
@@ -41,6 +47,14 @@ const Profile = () => {
           </div>
         </Card>
       </section>
+
+      <Card>
+        <Hobbies />
+      </Card>
+
+      <Card>
+        <Sports />
+      </Card>
 
       <Button text="Back to Homepage" navigateTo="" />
     </div>

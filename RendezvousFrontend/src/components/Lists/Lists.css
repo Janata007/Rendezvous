@@ -1,0 +1,33 @@
+.list-container {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-margin);
+}
+
+.title {
+  color: var(--accent-dark);
+  font-size: var(--xl);
+  font-weight: bold;
+}
+
+.list {
+  display: flex;
+  gap: var(--s-margin);
+  flex-wrap: wrap;
+
+  text-align: center;
+}
+
+.badge {
+  border: solid 2px var(--accent-dark);
+  padding: var(--s-padding);
+  border-radius: var(--md-radius);
+  font-size: var(--s);
+  font-style: italic;
+  font-weight: bold;
+  color: var(--accent-dark);
+}
