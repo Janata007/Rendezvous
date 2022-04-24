@@ -5,58 +5,53 @@ import AppContext from "../../context/app-context";
 import RendezvousService from "../../repository/RendezvousRepository";
 import "./Profile.css";
 
-const hobbies = [
-  "READING",
-  "EATING_OUT",
-  "PAINTING",
-  "COOKING",
-  "PHOTOGRAPHY",
-  "MUSIC",
-  "CAMPING",
-  "SEWING",
-  "GARDENING",
-  "VIDEO_GAMES",
-  "FISHING",
-  "TRAVELING",
-  "MOVIES",
-  "BOARD_GAMES",
-  "PARTYING",
-  "WALKS",
-  "WRITING",
-  "SHOPPING",
+const sports = [
+  "RUGBY",
+  "FOOTBALL",
+  "TENNIS",
+  "RUNNING",
+  "GYM",
+  "HIIT",
+  "CROSSFIT",
+  "GOLF",
+  "VOLLEYBALL",
+  "HOCKEY",
+  "BASKETBALL",
+  "BASEBALL",
+  "CHESS",
 ];
 
-const EditHobbies = () => {
+const EditSports = () => {
   const appContext = useContext(AppContext);
 
-  const checkHobbyIsPresent = (hobby) => {
-    let userHobbies = [];
-    appContext.activeUser.hobbies.forEach((userHobby) => {
-      userHobbies.push(userHobby.hobby);
+  const checkSportIsPresent = (sport) => {
+    let userSports = [];
+    appContext.activeUser.sports.forEach((userSport) => {
+      userSports.push(userSport.sport);
     });
 
-    return userHobbies.includes(hobby);
+    return userSports.includes(sport);
   };
 
-  const addHobbyHandler = (hobby) => {
-    RendezvousService.fetchAllHobbies()
+  const addSportHandler = (sport) => {
+    RendezvousService.fetchAllSports()
       .then((response) => {
         return response.data;
       })
       .then((data) => {
-        data.forEach((availableHobby) => {
-          if (availableHobby.hobby === hobby) {
-            RendezvousService.addHobbyToUser(
-              availableHobby.id,
+        data.forEach((availableSport) => {
+          if (availableSport.sport === sport) {
+            RendezvousService.addSportToUser(
+              availableSport.id,
               appContext.activeUser.id
             )
               .then((response) => {
                 if (response.status === 200) {
                   appContext.dispatch({
-                    type: "ADD_HOBBY",
-                    hobby: {
-                      id: availableHobby.id,
-                      hobby: availableHobby.hobby,
+                    type: "ADD_SPORT",
+                    sport: {
+                      id: availableSport.id,
+                      sport: availableSport.sport,
                     },
                   });
                 }
@@ -77,19 +72,19 @@ const EditHobbies = () => {
   return (
     <div className="profileEdit page">
       <Card>
-        <h3 className="edit-title">Click to add/remove hobbies:</h3>
+        <h3 className="edit-title">Click to add/remove sports:</h3>
 
         <ul className="available-list">
-          {hobbies.map((hobby) => {
+          {sports.map((sport) => {
             return (
               <li
-                key={hobby}
+                key={sport}
                 className={`available ${
-                  checkHobbyIsPresent(hobby) ? "present" : ""
+                  checkSportIsPresent(sport) ? "present" : ""
                 }`}
-                onClick={() => addHobbyHandler(hobby)}
+                onClick={() => addSportHandler(sport)}
               >
-                {hobby.replace("_", " ")}
+                {sport}
               </li>
             );
           })}
@@ -100,4 +95,4 @@ const EditHobbies = () => {
   );
 };
 
-export default EditHobbies;
+export default EditSports;

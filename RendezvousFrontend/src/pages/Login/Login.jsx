@@ -53,6 +53,7 @@ const Login = () => {
             appContext.dispatch({
               type: "LOGIN",
               user: {
+                id: data.id,
                 username: data.username,
                 name: data.name,
                 surname: data.surname,

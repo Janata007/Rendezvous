@@ -5,58 +5,57 @@ import AppContext from "../../context/app-context";
 import RendezvousService from "../../repository/RendezvousRepository";
 import "./Profile.css";
 
-const hobbies = [
-  "READING",
-  "EATING_OUT",
-  "PAINTING",
-  "COOKING",
-  "PHOTOGRAPHY",
-  "MUSIC",
-  "CAMPING",
-  "SEWING",
-  "GARDENING",
-  "VIDEO_GAMES",
-  "FISHING",
-  "TRAVELING",
-  "MOVIES",
-  "BOARD_GAMES",
-  "PARTYING",
-  "WALKS",
-  "WRITING",
-  "SHOPPING",
+const locations = [
+  "COFFEE_SHOP",
+  "DISCO",
+  "BAR",
+  "PARK",
+  "ICE_SKATING_RINK",
+  "BOWLING",
+  "MOUNTAIN",
+  "ARCADE",
+  "MALL",
+  "CINEMA",
+  "RESTAURANT",
+  "CEMETERY",
+  "MUSEUM",
+  "THEATRE",
+  "ESCAPE_ROOM",
+  "ZOO",
+  "OUTSIDE",
 ];
 
-const EditHobbies = () => {
+const EditLocations = () => {
   const appContext = useContext(AppContext);
 
-  const checkHobbyIsPresent = (hobby) => {
-    let userHobbies = [];
-    appContext.activeUser.hobbies.forEach((userHobby) => {
-      userHobbies.push(userHobby.hobby);
+  const checkLocationIsPresent = (location) => {
+    let userLocations = [];
+    appContext.activeUser.musicGenres.forEach((userLocation) => {
+      userLocations.push(userLocation.location);
     });
 
-    return userHobbies.includes(hobby);
+    return userLocations.includes(location);
   };
 
-  const addHobbyHandler = (hobby) => {
-    RendezvousService.fetchAllHobbies()
+  const addLocationHandler = (location) => {
+    RendezvousService.fetchAllLocations()
       .then((response) => {
         return response.data;
       })
       .then((data) => {
-        data.forEach((availableHobby) => {
-          if (availableHobby.hobby === hobby) {
-            RendezvousService.addHobbyToUser(
-              availableHobby.id,
+        data.forEach((availableLocation) => {
+          if (availableLocation.location === location) {
+            RendezvousService.AddLocationToUser(
+              availableLocation.id,
               appContext.activeUser.id
             )
               .then((response) => {
                 if (response.status === 200) {
                   appContext.dispatch({
-                    type: "ADD_HOBBY",
-                    hobby: {
-                      id: availableHobby.id,
-                      hobby: availableHobby.hobby,
+                    type: "ADD_MUSIC_GENRE",
+                    location: {
+                      id: availableLocation.id,
+                      location: availableLocation.location,
                     },
                   });
                 }
@@ -77,19 +76,19 @@ const EditHobbies = () => {
   return (
     <div className="profileEdit page">
       <Card>
-        <h3 className="edit-title">Click to add/remove hobbies:</h3>
+        <h3 className="edit-title">Click to add/remove locations:</h3>
 
         <ul className="available-list">
-          {hobbies.map((hobby) => {
+          {locations.map((location) => {
             return (
               <li
-                key={hobby}
+                key={location}
                 className={`available ${
-                  checkHobbyIsPresent(hobby) ? "present" : ""
+                  checkLocationIsPresent(location) ? "present" : ""
                 }`}
-                onClick={() => addHobbyHandler(hobby)}
+                onClick={() => addLocationHandler(location)}
               >
-                {hobby.replace("_", " ")}
+                {location.replace("_", " ")}
               </li>
             );
           })}
@@ -100,4 +99,4 @@ const EditHobbies = () => {
   );
 };
 
-export default EditHobbies;
+export default EditLocations;

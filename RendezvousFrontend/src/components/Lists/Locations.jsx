@@ -1,9 +1,11 @@
 import { React, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import AppContext from "../../context/app-context";
 import "./Lists.css";
 
 const Locations = () => {
   const appContext = useContext(AppContext);
+  let navigate = useNavigate();
 
   return (
     <div className="list-container">
@@ -22,7 +24,7 @@ const Locations = () => {
       ) : (
         <p>You currently have no locations.</p>
       )}
-      <span className="edit-link">
+      <span className="edit-link" onClick={() => navigate("editLocations")}>
         {appContext.activeUser.locations.length > 0 ? "Edit" : "Add"} Locations
       </span>
     </div>

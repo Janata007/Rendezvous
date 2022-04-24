@@ -4,6 +4,7 @@ import AppContext from "./app-context";
 export const defaultAppState = {
   users: [],
   activeUser: {
+    id: null,
     username: "",
     name: "",
     surname: "",
@@ -11,8 +12,8 @@ export const defaultAppState = {
     city: "",
     hobbies: [],
     sports: [],
-    locations: [],
     musicGenres: [],
+    locations: [],
   },
   isLoggedIn: false,
 };
@@ -26,6 +27,7 @@ export const appReducer = (state, action) => {
         ...state,
         isLoggedIn: false,
         activeUser: {
+          id: null,
           username: "",
           name: "",
           surname: "",
@@ -33,10 +35,74 @@ export const appReducer = (state, action) => {
           city: "",
           hobbies: [],
           sports: [],
-          locations: [],
           musicGenres: [],
+          locations: [],
         },
       };
+
+    case "ADD_HOBBY":
+      let hobbyToBePushed = { id: action.hobby.id, hobby: action.hobby.hobby };
+
+      if (
+        !state.activeUser.hobbies.some(
+          (hobby) => hobby.hobby === hobbyToBePushed.hobby
+        )
+      )
+        state.activeUser.hobbies.push(hobbyToBePushed);
+
+      return {
+        ...state,
+      };
+
+    case "ADD_SPORT":
+      let sportToBePushed = { id: action.sport.id, sport: action.sport.sport };
+
+      if (
+        !state.activeUser.sports.some(
+          (sport) => sport.sport === sportToBePushed.sport
+        )
+      )
+        state.activeUser.sports.push(sportToBePushed);
+
+      return {
+        ...state,
+      };
+
+    case "ADD_MUSIC_GENRE":
+      let musicGenreToBePushed = {
+        id: action.musicGenre.id,
+        musicGenre: action.musicGenre.musicGenre,
+      };
+
+      if (
+        !state.activeUser.musicGenres.some(
+          (musicGenre) =>
+            musicGenre.musicGenre === musicGenreToBePushed.musicGenre
+        )
+      )
+        state.activeUser.musicGenres.push(musicGenreToBePushed);
+
+      return {
+        ...state,
+      };
+
+    case "ADD_LOCATION":
+      let locationToBePushed = {
+        id: action.location.id,
+        location: action.location.location,
+      };
+
+      if (
+        !state.activeUser.locations.some(
+          (location) => location.location === locationToBePushed.location
+        )
+      )
+        state.activeUser.locations.push(locationToBePushed);
+
+      return {
+        ...state,
+      };
+
     case "LOAD_USERS":
       return { ...state, users: action.users };
     default:

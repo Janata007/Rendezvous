@@ -1,4 +1,4 @@
-import { React, useContext } from "react";
+import { React, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AppContext from "../../context/app-context";
 import "./Lists.css";
@@ -6,6 +6,8 @@ import "./Lists.css";
 const Hobbies = () => {
   const appContext = useContext(AppContext);
   let navigate = useNavigate();
+
+  useEffect(() => {}, [appContext]);
 
   return (
     <div className="list-container">

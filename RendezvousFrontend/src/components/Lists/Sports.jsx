@@ -1,9 +1,13 @@
-import { React, useContext } from "react";
+import { React, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import AppContext from "../../context/app-context";
 import "./Lists.css";
 
 const Sports = () => {
   const appContext = useContext(AppContext);
+  let navigate = useNavigate();
+
+  useEffect(() => {}, [appContext]);
 
   return (
     <div className="list-container">
@@ -22,7 +26,7 @@ const Sports = () => {
       ) : (
         <p>You currently have no sports.</p>
       )}
-      <span className="edit-link">
+      <span className="edit-link" onClick={() => navigate("editSports")}>
         {appContext.activeUser.sports.length > 0 ? "Edit" : "Add"} Sports
       </span>
     </div>

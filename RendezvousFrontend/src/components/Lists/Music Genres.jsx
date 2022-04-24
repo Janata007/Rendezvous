@@ -1,9 +1,11 @@
 import { React, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import AppContext from "../../context/app-context";
 import "./Lists.css";
 
 const MusicGenres = () => {
   const appContext = useContext(AppContext);
+  let navigate = useNavigate();
 
   return (
     <div className="list-container">
@@ -22,7 +24,7 @@ const MusicGenres = () => {
       ) : (
         <p>You currently have no music genres.</p>
       )}
-      <span className="edit-link">
+      <span className="edit-link" onClick={() => navigate("editMusicGenres")}>
         {appContext.activeUser.musicGenres.length > 0 ? "Edit" : "Add"} Music
         Genres
       </span>

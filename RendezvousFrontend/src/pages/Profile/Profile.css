@@ -43,7 +43,7 @@
   margin-bottom: var(--md-margin);
 }
 
-.available-hobbies {
+.available-list {
   width: 100%;
   display: flex;
   gap: var(--s-margin);
@@ -54,10 +54,15 @@
 .available {
   width: 100%;
   padding: var(--s-padding);
-  border: solid 2px var(--accent-dark);
+  border: solid 3px var(--danger);
   border-radius: var(--s-radius);
 
-  color: var(--accent-dark);
-  font-size: var(--md);
+  color: var(--danger);
+  font-size: var(--s);
   font-weight: bold;
+}
+
+.available.present {
+  border-color: var(--success);
+  color: var(--success);
 }

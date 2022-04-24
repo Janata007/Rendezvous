@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import React from "react";
 import Button from "../../components/Helper/Buttons/Button";
 import Card from "../../components/Helper/Card/Card";
 import logo from "../../assets/images/logo.png";
@@ -6,15 +6,6 @@ import "../Pages.css";
 import "./Register.css";
 
 const Register = () => {
-  const [firstName, setFirstName] = useState("");
-
-  const firstNameHandler = (e) => {
-    let firstName = e.target.value;
-    setFirstName(firstName);
-    console.log(firstName);
-  };
-
-  const checkInputs = () => {};
   return (
     <div className="register page">
       <img className="logo" src={logo} alt="rendezvous-logo" />
@@ -27,7 +18,6 @@ const Register = () => {
               type="text"
               className="register-input"
               placeholder="First Name"
-              onChange={firstNameHandler}
             />
           </div>
 

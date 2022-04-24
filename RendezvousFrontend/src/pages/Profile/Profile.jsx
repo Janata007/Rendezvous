@@ -11,20 +11,22 @@ const Profile = () => {
   const appContext = useContext(AppContext);
 
   const [user, setUser] = useState({
-    username: appContext.activeUser.username,
-    name: appContext.activeUser.name,
-    surname: appContext.activeUser.surname,
-    email: appContext.activeUser.email,
-    city: appContext.activeUser.city,
+    username: "",
+    name: "",
+    surname: "",
+    email: "",
+    city: "",
   });
 
   useEffect(() => {
     setUser({
-      ...appContext.activeUser,
+      username: appContext.activeUser.username,
+      name: appContext.activeUser.name,
+      surname: appContext.activeUser.surname,
+      email: appContext.activeUser.email,
+      city: appContext.activeUser.city,
     });
-
-    return () => {};
-  }, [appContext.activeUser]);
+  }, [appContext]);
 
   return (
     <div className="profile page">
@@ -32,7 +34,7 @@ const Profile = () => {
 
       <section className="personal">
         <h2 className="name">
-          {appContext.activeUser.name} {appContext.activeUser.surname}
+          {user.name} {user.surname}
         </h2>
 
         <span className="username">( {user.username} )</span>

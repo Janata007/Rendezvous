@@ -5,6 +5,9 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import NotFound from "./pages/NotFound/NotFound";
 import EditHobbies from "./pages/Profile/EditHobbies";
+import EditLocations from "./pages/Profile/EditLocations";
+import EditMusicGenres from "./pages/Profile/EditMusicGenres";
+import EditSports from "./pages/Profile/EditSports";
 import Profile from "./pages/Profile/Profile";
 import Register from "./pages/Register/Register";
 
@@ -18,6 +21,12 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/profile/editHobbies" element={<EditHobbies />} />
+          <Route path="/profile/editSports" element={<EditSports />} />
+          <Route
+            path="/profile/editMusicGenres"
+            element={<EditMusicGenres />}
+          />
+          <Route path="/profile/editLocations" element={<EditLocations />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

@@ -1,7 +1,7 @@
-import { React, createContext } from "react";
+import { createContext } from "react";
 
 const AppContext = createContext({
-  isLoggedIn: undefined,
+  isLoggedIn: false,
   activeUser: {},
   users: [],
 });
