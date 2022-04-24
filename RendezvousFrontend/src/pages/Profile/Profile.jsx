@@ -2,6 +2,8 @@ import { React, useContext, useEffect, useState } from "react";
 import Button from "../../components/Helper/Buttons/Button";
 import Card from "../../components/Helper/Card/Card";
 import Hobbies from "../../components/Lists/Hobbies";
+import MusicGenres from "../../components/Lists/Music Genres";
+import Locations from "../../components/Lists/Locations";
 import Sports from "../../components/Lists/Sports";
 import AppContext from "../../context/app-context";
 import "./Profile.css";
@@ -54,6 +56,14 @@ const Profile = () => {
 
       <Card>
         <Sports />
+      </Card>
+
+      <Card>
+        <MusicGenres />
+      </Card>
+
+      <Card>
+        <Locations />
       </Card>
 
       <Button text="Back to Homepage" navigateTo="" />

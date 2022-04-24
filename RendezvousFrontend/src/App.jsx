@@ -4,6 +4,7 @@ import AppProvider from "./context/AppProvider";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import NotFound from "./pages/NotFound/NotFound";
+import EditHobbies from "./pages/Profile/EditHobbies";
 import Profile from "./pages/Profile/Profile";
 import Register from "./pages/Register/Register";
 
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/editHobbies" element={<EditHobbies />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

@@ -22,6 +22,9 @@ const Sports = () => {
       ) : (
         <p>You currently have no sports.</p>
       )}
+      <span className="edit-link">
+        {appContext.activeUser.sports.length > 0 ? "Edit" : "Add"} Sports
+      </span>
     </div>
   );
 };

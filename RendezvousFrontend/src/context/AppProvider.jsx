@@ -11,6 +11,8 @@ export const defaultAppState = {
     city: "",
     hobbies: [],
     sports: [],
+    locations: [],
+    musicGenres: [],
   },
   isLoggedIn: false,
 };
@@ -31,6 +33,8 @@ export const appReducer = (state, action) => {
           city: "",
           hobbies: [],
           sports: [],
+          locations: [],
+          musicGenres: [],
         },
       };
     case "LOAD_USERS":

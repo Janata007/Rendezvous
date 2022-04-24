@@ -1,9 +1,11 @@
 import { React, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import AppContext from "../../context/app-context";
 import "./Lists.css";
 
 const Hobbies = () => {
   const appContext = useContext(AppContext);
+  let navigate = useNavigate();
 
   return (
     <div className="list-container">
@@ -20,8 +22,14 @@ const Hobbies = () => {
           })}
         </ul>
       ) : (
-        <p>You currently have no hobbies.</p>
+        <>
+          {" "}
+          <p>You currently have no hobbies.</p>
+        </>
       )}
+      <span className="edit-link" onClick={() => navigate("editHobbies")}>
+        {appContext.activeUser.hobbies.length > 0 ? "Edit" : "Add"} Hobbies
+      </span>
     </div>
   );
 };

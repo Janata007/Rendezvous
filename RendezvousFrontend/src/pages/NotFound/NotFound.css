@@ -1,9 +1,4 @@
 .not-found {
-  display: flex;
-  gap: var(--lg-margin);
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 .message {

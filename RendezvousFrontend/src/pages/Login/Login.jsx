@@ -60,6 +60,8 @@ const Login = () => {
                 city: data.city,
                 hobbies: data.hobbies,
                 sports: data.sports,
+                locations: data.locations,
+                musicGenres: data.musicGenres,
               },
             });
             navigate("/profile");
