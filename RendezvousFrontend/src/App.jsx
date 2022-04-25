@@ -2,14 +2,14 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AppProvider from "./context/AppProvider";
 import Home from "./pages/Home/Home";
-import Login from "./pages/Login/Login";
+import Login from "./pages/Auth/Login";
 import NotFound from "./pages/NotFound/NotFound";
 import EditHobbies from "./pages/Profile/EditHobbies";
 import EditLocations from "./pages/Profile/EditLocations";
 import EditMusicGenres from "./pages/Profile/EditMusicGenres";
 import EditSports from "./pages/Profile/EditSports";
 import Profile from "./pages/Profile/Profile";
-import Register from "./pages/Register/Register";
+import Register from "./pages/Auth/Register";
 
 const App = () => {
   return (

@@ -1,6 +1,6 @@
 import { React, useContext, useEffect } from "react";
-import Button from "../../components/Helper/Buttons/Button";
-import Card from "../../components/Helper/Card/Card";
+import Button from "../../components/Helper/Button";
+import Card from "../../components/Helper/Card";
 import AppContext from "../../context/app-context";
 import RendezvousService from "../../repository/RendezvousRepository";
 import "./Profile.css";
@@ -30,7 +30,7 @@ const EditLocations = () => {
 
   const checkLocationIsPresent = (location) => {
     let userLocations = [];
-    appContext.activeUser.musicGenres.forEach((userLocation) => {
+    appContext.activeUser.locations.forEach((userLocation) => {
       userLocations.push(userLocation.location);
     });
 
@@ -45,14 +45,14 @@ const EditLocations = () => {
       .then((data) => {
         data.forEach((availableLocation) => {
           if (availableLocation.location === location) {
-            RendezvousService.AddLocationToUser(
+            RendezvousService.addLocationToUser(
               availableLocation.id,
               appContext.activeUser.id
             )
               .then((response) => {
                 if (response.status === 200) {
                   appContext.dispatch({
-                    type: "ADD_MUSIC_GENRE",
+                    type: "ADD_LOCATION",
                     location: {
                       id: availableLocation.id,
                       location: availableLocation.location,

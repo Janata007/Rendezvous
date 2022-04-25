@@ -1,6 +1,6 @@
 import { React, useContext, useEffect } from "react";
-import Button from "../../components/Helper/Buttons/Button";
-import Card from "../../components/Helper/Card/Card";
+import Button from "../../components/Helper/Button";
+import Card from "../../components/Helper/Card";
 import AppContext from "../../context/app-context";
 import RendezvousService from "../../repository/RendezvousRepository";
 import "./Profile.css";
@@ -48,7 +48,7 @@ const EditSports = () => {
       .then((data) => {
         data.forEach((availableMusicGenre) => {
           if (availableMusicGenre.musicGenre === musicGenre) {
-            RendezvousService.AddMusicGenreToUser(
+            RendezvousService.addMusicGenreToUser(
               availableMusicGenre.id,
               appContext.activeUser.id
             )

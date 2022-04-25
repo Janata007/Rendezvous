@@ -1,9 +1,9 @@
 import { React, useContext, useEffect } from "react";
 import AppContext from "../../context/app-context";
-import "../Pages.css";
-import "./Home.css";
 import Authenticated from "./Authenticated";
 import Unauthenticated from "./Unauthenticated";
+import "../Pages.css";
+import "./Home.css";
 
 const Home = () => {
   const appContext = useContext(AppContext);

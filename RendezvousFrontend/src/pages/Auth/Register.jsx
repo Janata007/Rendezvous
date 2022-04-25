@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "../../components/Helper/Buttons/Button";
-import Card from "../../components/Helper/Card/Card";
+import Button from "../../components/Helper/Button";
+import Card from "../../components/Helper/Card";
 import logo from "../../assets/images/logo.png";
 import "../Pages.css";
 import "./Register.css";

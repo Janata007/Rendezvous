@@ -2,9 +2,9 @@ import { React, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import RendezvousService from "../../repository/RendezvousRepository";
 import AppContext from "../../context/app-context";
-import Card from "../../components/Helper/Card/Card";
+import Card from "../../components/Helper/Card";
+import Button from "../../components/Helper/Button";
 import logo from "../../assets/images/logo.png";
-import Button from "../../components/Helper/Buttons/Button";
 import "../Pages.css";
 import "./Login.css";
 
@@ -67,6 +67,15 @@ const Login = () => {
             });
             navigate("/profile");
             setRequestVal(true);
+
+            RendezvousService.fetchAllUsers()
+              .then((response) => {
+                return response.data;
+              })
+              .then((data) => {
+                appContext.dispatch({ type: "LOAD_USERS", users: data });
+              })
+              .catch((error) => console.log(error));
           } else setRequestVal(false);
         })
         .catch((error) => {

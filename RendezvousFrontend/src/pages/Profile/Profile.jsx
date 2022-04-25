@@ -1,6 +1,6 @@
 import { React, useContext, useEffect, useState } from "react";
-import Button from "../../components/Helper/Buttons/Button";
-import Card from "../../components/Helper/Card/Card";
+import Button from "../../components/Helper/Button";
+import Card from "../../components/Helper/Card";
 import Hobbies from "../../components/Lists/Hobbies";
 import MusicGenres from "../../components/Lists/Music Genres";
 import Locations from "../../components/Lists/Locations";

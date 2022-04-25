@@ -9,14 +9,14 @@ const Locations = () => {
 
   return (
     <div className="list-container">
-      <h1 className="title">Your Hobbies</h1>
+      <h1 className="title">Your Locations</h1>
 
       {appContext.activeUser.locations.length > 0 ? (
         <ul className="list">
           {appContext.activeUser.locations.map((location) => {
             return (
               <li key={location.id} className="badge">
-                {location.location}
+                {location.location.replace("_", " ")}
               </li>
             );
           })}

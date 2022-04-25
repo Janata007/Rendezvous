@@ -18,7 +18,7 @@ const Hobbies = () => {
           {appContext.activeUser.hobbies.map((hobby) => {
             return (
               <li key={hobby.id} className="badge">
-                {hobby.hobby}
+                {hobby.hobby.replace("_", " ")}
               </li>
             );
           })}

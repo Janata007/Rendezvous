@@ -50,9 +50,7 @@ export const appReducer = (state, action) => {
       )
         state.activeUser.hobbies.push(hobbyToBePushed);
 
-      return {
-        ...state,
-      };
+      return { ...state };
 
     case "ADD_SPORT":
       let sportToBePushed = { id: action.sport.id, sport: action.sport.sport };
@@ -64,9 +62,7 @@ export const appReducer = (state, action) => {
       )
         state.activeUser.sports.push(sportToBePushed);
 
-      return {
-        ...state,
-      };
+      return { ...state };
 
     case "ADD_MUSIC_GENRE":
       let musicGenreToBePushed = {
@@ -82,9 +78,7 @@ export const appReducer = (state, action) => {
       )
         state.activeUser.musicGenres.push(musicGenreToBePushed);
 
-      return {
-        ...state,
-      };
+      return { ...state };
 
     case "ADD_LOCATION":
       let locationToBePushed = {
@@ -99,12 +93,16 @@ export const appReducer = (state, action) => {
       )
         state.activeUser.locations.push(locationToBePushed);
 
-      return {
-        ...state,
-      };
+      return { ...state };
 
     case "LOAD_USERS":
-      return { ...state, users: action.users };
+      action.users.forEach((user) => {
+        if (user.username !== state.activeUser.username) state.users.push(user);
+      });
+
+      console.log(state.users);
+
+      return { ...state };
     default:
       return defaultAppState;
   }

@@ -1,11 +1,12 @@
 import axios from "../custom/axios";
 
 const RendezvousService = {
+  //users
   createUser: () => {
     return axios.post("/korisniciApi/users", "");
   },
 
-  fetchUsers: () => {
+  fetchAllUsers: () => {
     return axios.get("/korisniciApi/users");
   },
 
