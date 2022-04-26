@@ -1,8 +1,4 @@
 .profile {
-  display: flex;
-  gap: var(--md-margin);
-  flex-direction: column;
-  align-items: center;
 }
 
 .profile-pic {
@@ -39,4 +35,34 @@
 .city {
   font-style: italic;
   font-weight: bold;
+}
+
+.edit-title {
+  color: var(--accent-dark);
+  text-align: center;
+  margin-bottom: var(--md-margin);
+}
+
+.available-list {
+  width: 100%;
+  display: flex;
+  gap: var(--s-margin);
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.available {
+  width: 100%;
+  padding: var(--s-padding);
+  border: solid 3px var(--danger);
+  border-radius: var(--s-radius);
+
+  color: var(--danger);
+  font-size: var(--s);
+  font-weight: bold;
+}
+
+.available.present {
+  border-color: var(--success);
+  color: var(--success);
 }

@@ -9,7 +9,7 @@
   --s: 14px;
   --md: 16px;
   --lg: 18px;
-  --xl: 20px;
+  --xl: 22px;
   --xxl: 2rem;
   --big: 3rem;
   --huge: 5rem;
@@ -22,6 +22,8 @@
   --accent-light: #e7c990;
   --accent-dark: #533721;
   --accent-focus: #ffd700;
+  --danger: #e2062c;
+  --success: #3b7a57;
 
   /** PADDINGS & MARGINS */
   --s-padding: 0.25em;

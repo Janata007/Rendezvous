@@ -1,24 +1,23 @@
 package com.finki.ukim.rendezvous.service.impl;
 
+import static java.util.Objects.nonNull;
+
 import com.finki.ukim.rendezvous.model.Korisnik;
 import com.finki.ukim.rendezvous.repository.KorisnikRepository;
-
-import java.io.IOException;
-import java.net.InetAddress;
-import java.util.List;
-import java.util.Optional;
-
 import com.finki.ukim.rendezvous.service.KorisnikService;
 import com.maxmind.geoip2.DatabaseReader;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.CityResponse;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.List;
+import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import ua_parser.Client;
 import ua_parser.Parser;
-
-import javax.servlet.http.HttpServletRequest;
-
-import static java.util.Objects.nonNull;
 
 @Service
 public class KorisnikServiceImpl implements KorisnikService {
@@ -26,6 +25,8 @@ public class KorisnikServiceImpl implements KorisnikService {
     private final KorisnikRepository korisnikRepository;
     private final DatabaseReader databaseReader;
     private static final String UNKNOWN = "UNKNOWN";
+    private final String LOCALHOST_IPV4 = "127.0.0.1";
+    private final String LOCALHOST_IPV6 = "0:0:0:0:0:0:0:1";
 
     public KorisnikServiceImpl(KorisnikRepository korisnikRepository, DatabaseReader databaseReader) {
 
@@ -55,34 +56,69 @@ public class KorisnikServiceImpl implements KorisnikService {
     }
 
 
-
     @Override
     public Optional<Korisnik> findByUsername(String username) {
         return this.korisnikRepository.findByUsername(username);
     }
 
-    private String getDeviceDetails( String userAgent) throws IOException{
+    @Override
+    public String getClientIp(HttpServletRequest request) {
+        String ipAddress = request.getHeader("X-Forwarded-For");
+        if (StringUtils.isEmpty(ipAddress) || "unknown".equalsIgnoreCase(ipAddress)) {
+            ipAddress = request.getHeader("Proxy-Client-IP");
+        }
+
+        if (StringUtils.isEmpty(ipAddress) || "unknown".equalsIgnoreCase(ipAddress)) {
+            ipAddress = request.getHeader("WL-Proxy-Client-IP");
+        }
+
+        if (StringUtils.isEmpty(ipAddress) || "unknown".equalsIgnoreCase(ipAddress)) {
+            ipAddress = request.getRemoteAddr();
+            if (LOCALHOST_IPV4.equals(ipAddress) || LOCALHOST_IPV6.equals(ipAddress)) {
+                try {
+                    InetAddress inetAddress = InetAddress.getLocalHost();
+                    ipAddress = inetAddress.getHostAddress();
+                } catch (UnknownHostException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        if (!StringUtils.isEmpty(ipAddress)
+            && ipAddress.length() > 15
+            && ipAddress.indexOf(",") > 0) {
+            ipAddress = ipAddress.substring(0, ipAddress.indexOf(","));
+        }
+
+        return ipAddress;
+    }
+
+    private String getDeviceDetails(String userAgent) throws IOException {
         String deviceDetails = UNKNOWN;
         Parser parser = new Parser();
         Client client = parser.parse(userAgent);
         if (nonNull(client)) {
             deviceDetails = client.userAgent.family + " " + client.userAgent.major + "." + client.userAgent.minor +
-                    " - " + client.os.family + " " + client.os.major + "." + client.os.minor;
+                " - " + client.os.family + " " + client.os.major + "." + client.os.minor;
         }
 
         return deviceDetails;
     }
+
     @Override
-    public Korisnik getIpLocation(String ip, HttpServletRequest request) throws IOException, GeoIp2Exception {
-        Korisnik position = new Korisnik();
-        String location;
+    public String getIpLocation(String ip, HttpServletRequest request) throws IOException, GeoIp2Exception {
+        String city = "UNKNOWN";
         InetAddress ipAddress = InetAddress.getByName(ip);
 
-        CityResponse cityResponse = databaseReader.city(ipAddress);
-        if (nonNull(cityResponse) && nonNull(cityResponse.getCity())) {
-            position.setCity(cityResponse.getCity().getName());
+        try {
+            CityResponse cityResponse = databaseReader.city(ipAddress);
+            if (nonNull(cityResponse) && nonNull(cityResponse.getCity())) {
+                city = cityResponse.getCity().getName();
+            }
+        } catch (Exception e) {
+            return city;
         }
-        return position;
+        return city;
     }
 
 

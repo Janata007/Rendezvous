@@ -2,7 +2,8 @@
 
 html {
   box-sizing: border-box;
-  font-size: 18px;
+  font-size: var(--lg);
+  min-height: 100vh;
 }
 
 * {
