@@ -1,4 +1,6 @@
 import { React, useContext, useEffect, useState } from "react";
+import { FcLike, FcDislike } from "react-icons/fc";
+import { TiArrowRightThick } from "react-icons/ti";
 import AppContext from "../context/app-context";
 import RendezvousService from "../repository/RendezvousRepository";
 import "./UserCard.css";
@@ -22,6 +24,18 @@ const UserCard = () => {
       });
   };
 
+  const likeHandler = () => {
+    console.log("liked");
+  };
+
+  const dislikeHandler = () => {
+    console.log("disliked");
+  };
+
+  const skipHandler = () => {
+    console.log("skipped");
+  };
+
   useEffect(() => {
     fetchMatchPercent(appContext.activeUser.id, appContext.users[0].id);
   }, [appContext]);
@@ -41,7 +55,15 @@ const UserCard = () => {
         </section>
       </div>
       <div className="user-actions">
-        
+        <div className="action-button" onClick={() => likeHandler()}>
+          <FcLike />
+        </div>
+        <div className="action-button" onClick={() => dislikeHandler()}>
+          <FcDislike />
+        </div>
+        <div className="action-button" onClick={() => skipHandler()}>
+          <TiArrowRightThick />
+        </div>
       </div>
     </>
   );

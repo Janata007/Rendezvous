@@ -54,8 +54,6 @@ const EditSports = () => {
                       sport: availableSport.sport,
                     },
                   });
-
-                  console.log("add here");
                 }
               })
               .catch((error) => {
@@ -91,8 +89,6 @@ const EditSports = () => {
                     },
                   });
                 }
-
-                console.log("here");
               })
               .catch((error) => {
                 console.log(error);
