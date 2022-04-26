@@ -33,9 +33,9 @@ const Profile = () => {
       <div className="profile-pic"></div>
 
       <section className="personal">
-        <h2 className="name">
+        <h1 className="name-title">
           {user.name} {user.surname}
-        </h2>
+        </h1>
 
         <span className="username">( {user.username} )</span>
 

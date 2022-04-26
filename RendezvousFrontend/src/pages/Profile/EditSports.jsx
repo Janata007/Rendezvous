@@ -54,6 +54,8 @@ const EditSports = () => {
                       sport: availableSport.sport,
                     },
                   });
+
+                  console.log("add here");
                 }
               })
               .catch((error) => {
@@ -67,6 +69,41 @@ const EditSports = () => {
       });
   };
 
+  const removeSportHandler = (sport) => {
+    RendezvousService.fetchAllSports()
+      .then((response) => {
+        return response.data;
+      })
+      .then((data) => {
+        data.forEach((presentSport) => {
+          if (presentSport.sport === sport) {
+            RendezvousService.removeSportFromUser(
+              presentSport.id,
+              appContext.activeUser.id
+            )
+              .then((response) => {
+                if (response.status === 200) {
+                  appContext.dispatch({
+                    type: "REMOVED_SPORT",
+                    sport: {
+                      id: presentSport.id,
+                      sport: presentSport.sport,
+                    },
+                  });
+                }
+
+                console.log("here");
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   useEffect(() => {}, [appContext]);
 
   return (
@@ -82,7 +119,11 @@ const EditSports = () => {
                 className={`available ${
                   checkSportIsPresent(sport) ? "present" : ""
                 }`}
-                onClick={() => addSportHandler(sport)}
+                onClick={() =>
+                  checkSportIsPresent(sport)
+                    ? removeSportHandler(sport)
+                    : addSportHandler(sport)
+                }
               >
                 {sport}
               </li>

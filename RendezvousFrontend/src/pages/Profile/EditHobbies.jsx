@@ -72,6 +72,40 @@ const EditHobbies = () => {
       });
   };
 
+  const removeHobbyHandler = (hobby) => {
+    RendezvousService.fetchAllHobbies()
+      .then((response) => {
+        return response.data;
+      })
+      .then((data) => {
+        data.forEach((presentHobby) => {
+          if (presentHobby.hobby === hobby) {
+            RendezvousService.removeHobbyFromUser(
+              presentHobby.id,
+              appContext.activeUser.id
+            )
+              .then((response) => {
+                if (response.status === 200) {
+                  appContext.dispatch({
+                    type: "REMOVED_HOBBY",
+                    hobby: {
+                      id: presentHobby.id,
+                      hobby: presentHobby.hobby,
+                    },
+                  });
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {}, [appContext]);
 
   return (
@@ -87,7 +121,11 @@ const EditHobbies = () => {
                 className={`available ${
                   checkHobbyIsPresent(hobby) ? "present" : ""
                 }`}
-                onClick={() => addHobbyHandler(hobby)}
+                onClick={() =>
+                  checkHobbyIsPresent(hobby)
+                    ? removeHobbyHandler(hobby)
+                    : addHobbyHandler(hobby)
+                }
               >
                 {hobby.replace("_", " ")}
               </li>

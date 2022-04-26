@@ -19,6 +19,10 @@
   color: var(--accent-light);
 }
 
+.name-title {
+  color: var(--accent-light);
+}
+
 .username {
   display: block;
   margin-bottom: var(--md-margin);

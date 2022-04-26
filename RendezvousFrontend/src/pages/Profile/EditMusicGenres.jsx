@@ -74,6 +74,40 @@ const EditSports = () => {
       });
   };
 
+  const removeMusicGenreHandler = (musicGenre) => {
+    RendezvousService.fetchAllMusicGenres()
+      .then((response) => {
+        return response.data;
+      })
+      .then((data) => {
+        data.forEach((presentMusicGenre) => {
+          if (presentMusicGenre.musicGenre === musicGenre) {
+            RendezvousService.removeMusicGenreFromUser(
+              presentMusicGenre.id,
+              appContext.activeUser.id
+            )
+              .then((response) => {
+                if (response.status === 200) {
+                  appContext.dispatch({
+                    type: "REMOVED_MUSIC_GENRE",
+                    musicGenre: {
+                      id: presentMusicGenre.id,
+                      musicGenre: presentMusicGenre.musicGenre,
+                    },
+                  });
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {}, [appContext]);
 
   return (
@@ -89,7 +123,11 @@ const EditSports = () => {
                 className={`available ${
                   checkMusicGenreIsPresent(musicGenre) ? "present" : ""
                 }`}
-                onClick={() => addMusicGenreHandler(musicGenre)}
+                onClick={() =>
+                  checkMusicGenreIsPresent(musicGenre)
+                    ? removeMusicGenreHandler(musicGenre)
+                    : addMusicGenreHandler(musicGenre)
+                }
               >
                 {musicGenre}
               </li>

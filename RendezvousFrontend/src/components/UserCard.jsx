@@ -27,18 +27,23 @@ const UserCard = () => {
   }, [appContext]);
 
   return (
-    <div className="user-card">
-      <div className="user-image"></div>
-      <section className="user-info">
-        <h4 className="name">
-          {`${appContext.users[0].name} ${appContext.users[0].surname}`}
-        </h4>
-        <p className="desc">
-          According to common interests, this user is a{" "}
-          <span className="percent">{matchPercent}% </span>match.
-        </p>
-      </section>
-    </div>
+    <>
+      <div className="user-card">
+        <div className="user-image"></div>
+        <section className="user-info">
+          <h4 className="name">
+            {`${appContext.users[0].name} ${appContext.users[0].surname}`}
+          </h4>
+          <p className="desc">
+            According to common interests, this user is a{" "}
+            <span className="percent">{matchPercent}% </span>match.
+          </p>
+        </section>
+      </div>
+      <div className="user-actions">
+        
+      </div>
+    </>
   );
 };
 

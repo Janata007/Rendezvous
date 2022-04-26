@@ -52,6 +52,17 @@ export const appReducer = (state, action) => {
 
       return { ...state };
 
+    case "REMOVED_HOBBY":
+      let hobbyToBeRemoved = { id: action.hobby.id, hobby: action.hobby.hobby };
+
+      let newUserHobbies = state.activeUser.hobbies.filter(
+        (hobby) => hobby.id !== hobbyToBeRemoved.id
+      );
+
+      state.activeUser.hobbies = newUserHobbies;
+
+      return { ...state };
+
     case "ADD_SPORT":
       let sportToBePushed = { id: action.sport.id, sport: action.sport.sport };
 
@@ -61,6 +72,17 @@ export const appReducer = (state, action) => {
         )
       )
         state.activeUser.sports.push(sportToBePushed);
+
+      return { ...state };
+
+    case "REMOVED_SPORT":
+      let sportToBeRemoved = { id: action.sport.id, sport: action.sport.sport };
+
+      let newUserSports = state.activeUser.sports.filter(
+        (sport) => sport.id !== sportToBeRemoved.id
+      );
+
+      state.activeUser.sports = newUserSports;
 
       return { ...state };
 
@@ -80,6 +102,20 @@ export const appReducer = (state, action) => {
 
       return { ...state };
 
+    case "REMOVED_MUSIC_GENRE":
+      let musicGenreToBeRemoved = {
+        id: action.musicGenre.id,
+        musicGenre: action.musicGenre.musicGenre,
+      };
+
+      let newUserMusicGenres = state.activeUser.musicGenres.filter(
+        (musicGenre) => musicGenre.id !== musicGenreToBeRemoved.id
+      );
+
+      state.activeUser.musicGenres = newUserMusicGenres;
+
+      return { ...state };
+
     case "ADD_LOCATION":
       let locationToBePushed = {
         id: action.location.id,
@@ -92,6 +128,20 @@ export const appReducer = (state, action) => {
         )
       )
         state.activeUser.locations.push(locationToBePushed);
+
+      return { ...state };
+
+    case "REMOVED_LOCATION":
+      let locationToBeRemoved = {
+        id: action.location.id,
+        location: action.location.location,
+      };
+
+      let newUserLocations = state.activeUser.locations.filter(
+        (location) => location.id !== locationToBeRemoved.id
+      );
+
+      state.activeUser.locations = newUserLocations;
 
       return { ...state };
 

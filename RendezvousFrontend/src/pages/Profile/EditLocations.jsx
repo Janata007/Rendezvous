@@ -71,6 +71,40 @@ const EditLocations = () => {
       });
   };
 
+  const removeLocationHandler = (location) => {
+    RendezvousService.fetchAllLocations()
+      .then((response) => {
+        return response.data;
+      })
+      .then((data) => {
+        data.forEach((presentLocation) => {
+          if (presentLocation.location === location) {
+            RendezvousService.removeLocationFromUser(
+              presentLocation.id,
+              appContext.activeUser.id
+            )
+              .then((response) => {
+                if (response.status === 200) {
+                  appContext.dispatch({
+                    type: "REMOVED_LOCATION",
+                    location: {
+                      id: presentLocation.id,
+                      location: presentLocation.location,
+                    },
+                  });
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {}, [appContext]);
 
   return (
@@ -86,7 +120,11 @@ const EditLocations = () => {
                 className={`available ${
                   checkLocationIsPresent(location) ? "present" : ""
                 }`}
-                onClick={() => addLocationHandler(location)}
+                onClick={() =>
+                  checkLocationIsPresent(location)
+                    ? removeLocationHandler(location)
+                    : addLocationHandler(location)
+                }
               >
                 {location.replace("_", " ")}
               </li>

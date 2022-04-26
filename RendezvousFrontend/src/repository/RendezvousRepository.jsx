@@ -23,12 +23,20 @@ const RendezvousService = {
     return axios.put(`/korisniciApi/${userId}/hobbies/${hobbyId}`);
   },
 
+  removeHobbyFromUser: (hobbyId, userId) => {
+    return axios.delete(`/korisniciApi/${userId}/hobbies/${hobbyId}`);
+  },
+
   fetchAllSports: () => {
     return axios.get("/sportsApi/sports");
   },
 
   addSportToUser: (sportId, userId) => {
     return axios.put(`/korisniciApi/${userId}/sports/${sportId}`);
+  },
+
+  removeSportFromUser: (sportId, userId) => {
+    return axios.delete(`/korisniciApi/${userId}/sports/${sportId}`);
   },
 
   fetchAllMusicGenres: () => {
@@ -39,12 +47,20 @@ const RendezvousService = {
     return axios.put(`/korisniciApi/${userId}/music/${musicGenreId}`);
   },
 
+  removeMusicGenreFromUser: (musicGenreId, userId) => {
+    return axios.delete(`/korisniciApi/${userId}/music/${musicGenreId}`);
+  },
+
   fetchAllLocations: () => {
     return axios.get("/locationsApi/locations");
   },
 
   addLocationToUser: (locationId, userId) => {
     return axios.put(`/korisniciApi/${userId}/locations/${locationId}`);
+  },
+
+  removeLocationFromUser: (locationId, userId) => {
+    return axios.delete(`/korisniciApi/${userId}/locations/${locationId}`);
   },
 
   //match
