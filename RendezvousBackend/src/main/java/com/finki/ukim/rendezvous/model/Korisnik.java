@@ -100,13 +100,13 @@ public class Korisnik implements UserDetails {
     }
 
     public Korisnik(String password, String username, String name, String surname, AppUserRole appUserRole) {
-    this.password = password;
-    this.username = username;
-    this.name = name;
-    this.surname = surname;
-    this.appUserRole = appUserRole;
-    this.locked = true;
-    this.enabled = true;
+        this.password = password;
+        this.username = username;
+        this.name = name;
+        this.surname = surname;
+        this.appUserRole = appUserRole;
+        this.locked = true;
+        this.enabled = true;
     }
 
     @Override
@@ -149,15 +149,31 @@ public class Korisnik implements UserDetails {
         sports.add(sport);
     }
 
+    public void deleteSport(Sports sport) {
+        sports.remove(sport);
+    }
+
     public void addHobby(Hobbies hobby) {
         hobbies.add(hobby);
+    }
+
+    public void deleteHobby(Hobbies hobby) {
+        hobbies.remove(hobby);
     }
 
     public void addLocation(Locations location) {
         locations.add(location);
     }
 
+    public void deleteLocation(Locations location) {
+        locations.remove(location);
+    }
+
     public void addMusicGenre(MusicGenres musicGenre) {
         musicGenres.add(musicGenre);
+    }
+
+    public void deleteMusicGenre(MusicGenres musicGenre) {
+        musicGenres.remove(musicGenre);
     }
 }
