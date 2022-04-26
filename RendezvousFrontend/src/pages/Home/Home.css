@@ -1,7 +1,7 @@
 .home {
-  display: flex;
-  gap: var(--lg-margin);
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+}
+
+.home-loggedIn {
+  justify-content: space-between;
+  padding: 0;
 }

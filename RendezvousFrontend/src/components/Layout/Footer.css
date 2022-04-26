@@ -1,0 +1,39 @@
+.footer {
+  width: 100%;
+  height: 20%;
+  background-color: var(--accent-light);
+
+  padding: var(--lg-padding);
+}
+
+.footer-items {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-item {
+  width: 100%;
+  height: 100%;
+}
+
+.logout-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logout-container p {
+  font-size: var(--md);
+  color: var(--accent-dark);
+}
+
+.logout-container svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--accent-dark);
+}

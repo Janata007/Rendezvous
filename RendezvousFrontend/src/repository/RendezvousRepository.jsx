@@ -1,7 +1,12 @@
 import axios from "../custom/axios";
 
 const RendezvousService = {
-  fetchUsers: () => {
+  //users
+  createUser: () => {
+    return axios.post("/korisniciApi/users", "");
+  },
+
+  fetchAllUsers: () => {
     return axios.get("/korisniciApi/users");
   },
 
@@ -9,8 +14,37 @@ const RendezvousService = {
     return axios.get(`/korisniciApi/users/username/${username}`);
   },
 
-  createUser: () => {
-    return axios.post("/korisniciApi/users", "");
+  //hobbies, sports, music genres, locations
+  fetchAllHobbies: () => {
+    return axios.get("/hobbiesApi/hobbies");
+  },
+
+  addHobbyToUser: (hobbyId, userId) => {
+    return axios.put(`/korisniciApi/${userId}/hobbies/${hobbyId}`);
+  },
+
+  fetchAllSports: () => {
+    return axios.get("/sportsApi/sports");
+  },
+
+  addSportToUser: (sportId, userId) => {
+    return axios.put(`/korisniciApi/${userId}/sports/${sportId}`);
+  },
+
+  fetchAllMusicGenres: () => {
+    return axios.get("/musicApi/genres");
+  },
+
+  addMusicGenreToUser: (musicGenreId, userId) => {
+    return axios.put(`/korisniciApi/${userId}/music/${musicGenreId}`);
+  },
+
+  fetchAllLocations: () => {
+    return axios.get("/locationsApi/locations");
+  },
+
+  addLocationToUser: (locationId, userId) => {
+    return axios.put(`/korisniciApi/${userId}/locations/${locationId}`);
   },
 };
 
