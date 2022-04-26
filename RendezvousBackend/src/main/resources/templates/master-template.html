@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User List</title>
+</head>
+<body>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Surname</th>
+        <th scope="col">Username</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="korisnik : ${korisnici}" class="korisnik">
+        <td th:text="${korisnik.getName()}"></td>
+        <td th:text="${korisnik.getSurname()}"></td>
+        <td th:text="${korisnik.getUsername()}"></td>
+        <td class="text-right">
+            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                <form th:action="@{'/adminPage/delete/{id}' (id=${korisnik.getId()})}"
+                      th:method="POST">
+                    <button type="submit"
+                            class="btn btn-sm btn-danger delete-product">
+                        <i class="fa fa-trash">Delete</i>
+                    </button>
+                </form>
+            </th:block>
+            <!--            </th:block>-->
+            <!--            <th:block sec:authorize="hasRole('ROLE_ADMIN')">-->
+            <!--                <a th:href="@{'/products/edit-form/{id}' (id=${product.getId()})}"-->
+            <!--                   class="btn btn-sm btn-info edit-product">-->
+            <!--                    <i class="fa fa-trash">Edit</i>-->
+            <!--                </a>-->
+            <!--            </th:block>-->
+        </td>
+    </tr>
+    <div class="col mb-3">
+    </div>
+
+    </tbody>
+</table>
+
+
+</body>
+</html>
