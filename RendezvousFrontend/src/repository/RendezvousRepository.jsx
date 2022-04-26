@@ -46,6 +46,18 @@ const RendezvousService = {
   addLocationToUser: (locationId, userId) => {
     return axios.put(`/korisniciApi/${userId}/locations/${locationId}`);
   },
+
+  //match
+  getMatchPercentForUsers: (userIdOne, userIdTwo) => {
+    return axios.request({
+      url: "matchApi/percent/",
+      method: "get",
+      params: {
+        id1: userIdOne,
+        id2: userIdTwo,
+      },
+    });
+  },
 };
 
 export default RendezvousService;

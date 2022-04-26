@@ -24,6 +24,9 @@
   --accent-focus: #ffd700;
   --danger: #e2062c;
   --success: #3b7a57;
+  --offwhite: #faf0e6;
+  --text: #282c35;
+  --headings: #0f0f0f;
 
   /** PADDINGS & MARGINS */
   --s-padding: 0.25em;

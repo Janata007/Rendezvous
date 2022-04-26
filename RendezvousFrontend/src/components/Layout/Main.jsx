@@ -1,5 +1,6 @@
 import { React, useContext, useEffect } from "react";
 import AppContext from "../../context/app-context";
+import UserCard from "../UserCard";
 import "./Main.css";
 
 const Main = () => {
@@ -9,9 +10,7 @@ const Main = () => {
 
   return (
     <main className="main">
-      <div className="main-card">
-        <section className="user-info"></section>
-      </div>
+      <UserCard />
     </main>
   );
 };

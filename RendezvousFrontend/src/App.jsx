@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AppProvider from "./context/AppProvider";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Auth/Login";
-import NotFound from "./pages/NotFound/NotFound";
+import NotFound from "./pages/Misc/NotFound";
 import EditHobbies from "./pages/Profile/EditHobbies";
 import EditLocations from "./pages/Profile/EditLocations";
 import EditMusicGenres from "./pages/Profile/EditMusicGenres";

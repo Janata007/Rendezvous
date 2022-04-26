@@ -100,8 +100,6 @@ export const appReducer = (state, action) => {
         if (user.username !== state.activeUser.username) state.users.push(user);
       });
 
-      console.log(state.users);
-
       return { ...state };
     default:
       return defaultAppState;

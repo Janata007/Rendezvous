@@ -65,8 +65,6 @@ const Login = () => {
                 musicGenres: data.musicGenres,
               },
             });
-            navigate("/profile");
-            setRequestVal(true);
 
             RendezvousService.fetchAllUsers()
               .then((response) => {
@@ -74,6 +72,8 @@ const Login = () => {
               })
               .then((data) => {
                 appContext.dispatch({ type: "LOAD_USERS", users: data });
+                navigate("/");
+                setRequestVal(true);
               })
               .catch((error) => console.log(error));
           } else setRequestVal(false);
