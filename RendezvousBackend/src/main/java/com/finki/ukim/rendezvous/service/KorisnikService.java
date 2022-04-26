@@ -12,6 +12,7 @@ public interface KorisnikService {
     public List<Korisnik> findAll();
     public Optional<Korisnik> findById(long id);
     public Korisnik save(Korisnik k);
+    public Korisnik edit(Long id, Korisnik k);
     public void deleteById(long id);
     public void deleteAll();
     public Optional<Korisnik> findByUsername(String username);

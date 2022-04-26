@@ -2,6 +2,7 @@ package com.finki.ukim.rendezvous.service.impl;
 
 import static java.util.Objects.nonNull;
 
+import com.finki.ukim.rendezvous.exceptions.UserNotFoundException;
 import com.finki.ukim.rendezvous.model.Korisnik;
 import com.finki.ukim.rendezvous.repository.KorisnikRepository;
 import com.finki.ukim.rendezvous.service.KorisnikService;
@@ -46,6 +47,26 @@ public class KorisnikServiceImpl implements KorisnikService {
     public Korisnik save(Korisnik k) {
         return this.korisnikRepository.save(k);
     }
+
+    @Override
+    public Korisnik edit(Long id, Korisnik k) {
+            Korisnik korisnik1 = this.korisnikRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
+            korisnik1.setHobbies(k.getHobbies());
+            korisnik1.setLocations(k.getLocations());
+            korisnik1.setMusicGenres(k.getMusicGenres());
+            korisnik1.setSports(k.getSports());
+            korisnik1.setCity(k.getCity());
+            korisnik1.setUsername(k.getUsername());
+            korisnik1.setEmail(k.getEmail());
+            korisnik1.setPassword(k.getPassword());
+            korisnik1.setName(k.getName());
+            korisnik1.setCity(k.getCity());
+            korisnik1.setDateOfBirth(k.getDateOfBirth());
+            korisnik1.setSurname(k.getSurname());
+            return this.korisnikRepository.save(korisnik1);
+    }
+
 
     public void deleteById(long id) {
         this.korisnikRepository.deleteById(id);

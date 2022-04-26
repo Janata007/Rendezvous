@@ -129,6 +129,16 @@ public class KorisnikController {
         }
     }
 
+    @PutMapping("/updateKorisnik/{id}")
+    public ResponseEntity<Korisnik> edit(@PathVariable Long id, @RequestBody Korisnik korisnik) {
+        try {
+            Korisnik korisnik1 = this.korisnikService.edit(id, korisnik);
+            return new ResponseEntity<>(korisnik1, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/users")
     public ResponseEntity<Korisnik> createKorisnik(@RequestBody Korisnik korisnik) {
         try {
@@ -139,8 +149,7 @@ public class KorisnikController {
                 }
             }
             Korisnik _korisnik = this.korisnikService
-                .save(new Korisnik(korisnik.getPassword(), korisnik.getUsername(), korisnik.getName(),
-                    korisnik.getEmail(), korisnik.getSurname(), korisnik.getDateOfBirth(),
+                .save(new Korisnik(korisnik.getPassword(), korisnik.getUsername(), korisnik.getName(), korisnik.getSurname(),
                     korisnik.getAppUserRole()));
             return new ResponseEntity<>(_korisnik, HttpStatus.CREATED);
         } catch (Exception e) {

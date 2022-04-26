@@ -43,7 +43,7 @@ public class LikesServiceImpl implements LikesService {
 
     @Override
     public Likes userPlusUltraLikesUser(long mainId, long likesId) {
-        Likes likes = new Likes(mainId, likesId, false, true);
+        Likes likes = new Likes(mainId, likesId, true, true);
         return this.likesRepository.save(likes);
     }
 

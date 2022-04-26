@@ -48,4 +48,10 @@ public class MatchController {
         String percent = this.matchService.matchPercent(id1, id2);
         return new ResponseEntity<String>(percent, HttpStatus.OK);
     }
+
+    @GetMapping("/match/")
+    public ResponseEntity<Boolean> getMatchBoolean(@RequestParam("id1") long id1, @RequestParam("id2") long id2) {
+        Boolean match = this.matchService.doBothMatch(id1, id2);
+        return new ResponseEntity<>(match, HttpStatus.OK);
+    }
 }
