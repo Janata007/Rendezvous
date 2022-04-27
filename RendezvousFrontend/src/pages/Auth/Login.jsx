@@ -63,6 +63,7 @@ const Login = () => {
                 sports: data.sports,
                 locations: data.locations,
                 musicGenres: data.musicGenres,
+                authority: data.authorities[0].authority,
               },
             });
 

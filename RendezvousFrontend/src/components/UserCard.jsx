@@ -14,10 +14,24 @@ const UserCard = () => {
   const likeHandler = () => {
     RendezvousService.likeUser(appContext.activeUser.id, appContext.users[0].id)
       .then((response) => {
+        let likedUser = appContext.users[0];
+
         appContext.dispatch({
           type: "LIKED_USER",
           likedUser: appContext.users[0],
         });
+
+        return likedUser;
+      })
+      .then((user) => {
+        RendezvousService.areUsersMatched(appContext.activeUser.id, user.id)
+          .then((response) => {
+            console.log(response.data);
+            if (response.data) {
+              appContext.dispatch({ type: "MATCHED_USER", matchedUser: user });
+            }
+          })
+          .catch((error) => console.log(error));
       })
       .catch((error) => console.log(error));
   };
