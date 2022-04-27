@@ -16,7 +16,7 @@
                            class="form-control"
                            id="name"
                            name="name"
-                           th:value="(${korisnik} != null ? ${product.getName()} : '')"
+                           th:value="(${korisnik} != null ? ${korisnik.getName()} : '')"
                            required
                            placeholder="Name">
                 </div>
@@ -64,7 +64,10 @@
                         </option>
                     </select>
                 </div>-->
-                <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit"
+                            class="btn btn-sm btn-danger delete-product">
+                        <i class="fa fa-trash">Add</i>
+                    </button>
                 <a type="button" class="btn btn-primary" href="/adminPage">Back</a>
             </form>
         </div>

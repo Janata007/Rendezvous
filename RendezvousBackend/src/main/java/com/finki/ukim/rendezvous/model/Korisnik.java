@@ -99,7 +99,7 @@ public class Korisnik implements UserDetails {
         this.enabled = true;
     }
 
-    public Korisnik(String password, String username, String name, String surname, AppUserRole appUserRole) {
+    public Korisnik(String name, String surname, String username, String password, AppUserRole appUserRole) {
         this.password = password;
         this.username = username;
         this.name = name;

@@ -35,6 +35,10 @@ public class AdminPageController {
         this.korisnikService.deleteById(id);
         return "redirect:/adminPage";
     }
+    @GetMapping("/addUser")
+    public String goToAddKorisnik(){
+        return "add-template";
+    }
 
     @PostMapping("/add")
     public String saveUser(

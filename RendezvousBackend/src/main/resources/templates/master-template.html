@@ -23,7 +23,7 @@
                 <form th:action="@{'/adminPage/delete/{id}' (id=${korisnik.getId()})}"
                       th:method="POST">
                     <button type="submit"
-                            class="btn btn-sm btn-danger delete-product">
+                            class="btn btn-sm btn-danger delete-korisnik">
                         <i class="fa fa-trash">Delete</i>
                     </button>
                 </form>
@@ -38,6 +38,17 @@
         </td>
     </tr>
     <div class="col mb-3">
+    </div>
+    <div>
+    <th:block>
+        <form th:action="@{'/adminPage/addUser'}"
+              th:method="GET">
+            <button type="submit"
+                    class="btn btn-sm btn-success">
+                <i class="fa fa-trash">Add user</i>
+            </button>
+        </form>
+    </th:block>
     </div>
 
     </tbody>
