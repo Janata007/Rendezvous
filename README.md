@@ -2,7 +2,7 @@
 
 ## Spring based application made with love and care.
 
-### Authors: Jana Markovikj, Bojan Dabevski, Marko Markovikj
+### Authors: Jana Markovikj(181112), Bojan Dabevski(181115), Marko Markovikj(181097)
 
 ## STACK
 |SPRING (JAVA) |REACT|CSS|
@@ -16,17 +16,17 @@ Hobbies - based on HobbiesEnum which the user has ManyToMany relationship (unidi
 Locations - based on LocationsEnum which the user has ManyToMany relationship (unidirectional)
 Sports -  based on SportsEnum which the user has ManyToMany relationship (unidirectional)
 MusicGenres -  based on MusicGenresEnum which the user has ManyToMany relationship (unidirectional)
-Likes - entity made for keeping records of which user liked/plus ultra liked/disliked which user
+Likes - entity made for keeping records of which user liked/disliked which user
 
 ### Repository:
-there are repositories for all entity models defined above
+There are repositories for all entity models defined above
 
 ### Service:
-there are services for all entity models defined above
+There are services for all entity models defined above
 MatchService - additional service meant for calculating the percent of which one user matches with another user based on the hobbies, locations, sports and music genres they overlap
 
 ### Web
-there are rest controllers for all entity models defined above
+There are rest controllers for all entity models defined above
 MatchController - additional controller for getting the percent of a match for users
 
 ### Video example:
