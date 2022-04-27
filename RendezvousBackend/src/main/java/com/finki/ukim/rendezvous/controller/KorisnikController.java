@@ -7,11 +7,13 @@ import com.finki.ukim.rendezvous.exceptions.SportNotFoundException;
 import com.finki.ukim.rendezvous.exceptions.UserNotFoundException;
 import com.finki.ukim.rendezvous.model.Hobbies;
 import com.finki.ukim.rendezvous.model.Korisnik;
+import com.finki.ukim.rendezvous.model.Likes;
 import com.finki.ukim.rendezvous.model.Locations;
 import com.finki.ukim.rendezvous.model.MusicGenres;
 import com.finki.ukim.rendezvous.model.Sports;
 import com.finki.ukim.rendezvous.service.HobbiesService;
 import com.finki.ukim.rendezvous.service.KorisnikService;
+import com.finki.ukim.rendezvous.service.LikesService;
 import com.finki.ukim.rendezvous.service.LocationsService;
 import com.finki.ukim.rendezvous.service.MusicGenreService;
 import com.finki.ukim.rendezvous.service.SportsService;
@@ -43,8 +45,10 @@ public class KorisnikController {
     private final SportsService sportsService;
     private final LocationsService locationsService;
     private final MusicGenreService musicGenreService;
+    private final LikesService likesService;
 
-    public KorisnikController(KorisnikService korisnikService, MusicGenreService musicGenreService,
+    public KorisnikController(LikesService likesService, KorisnikService korisnikService,
+                              MusicGenreService musicGenreService,
                               SportsService sportsService,
                               HobbiesService hobbiesService, LocationsService locationsService) {
         this.korisnikService = korisnikService;
@@ -52,6 +56,7 @@ public class KorisnikController {
         this.sportsService = sportsService;
         this.locationsService = locationsService;
         this.musicGenreService = musicGenreService;
+        this.likesService = likesService;
     }
 
     @PutMapping("/{korisnikId}/sports/{sportId}")
@@ -134,6 +139,24 @@ public class KorisnikController {
     public ResponseEntity<List<Korisnik>> getAllKorisnici() {
         List<Korisnik> korisnici = new ArrayList<>();
         korisnici = this.korisnikService.findAll();
+        return new ResponseEntity<>(korisnici, HttpStatus.OK);
+    }
+
+    @GetMapping("/users/{id}/search")
+    public ResponseEntity<List<Korisnik>> getKorisniciForLoggedInUser(@PathVariable long id) {
+        List<Korisnik> korisnici = new ArrayList<>();
+        korisnici = this.korisnikService.findAll();
+        Korisnik loggedIn = this.korisnikService.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+        korisnici.remove(loggedIn);
+        List<Likes> korisnikLikes = this.likesService.findAllByMainUserId(id);
+        for (Likes like : korisnikLikes) {
+            for (Korisnik k : korisnici) {
+                if (like.getLikedUserId() == k.getId()) {
+                    korisnici.remove(k);
+                }
+            }
+        }
+
         return new ResponseEntity<>(korisnici, HttpStatus.OK);
     }
 
