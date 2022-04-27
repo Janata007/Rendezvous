@@ -8,6 +8,10 @@ import "./Matches.css";
 const Matches = () => {
   const appContext = useContext(AppContext);
 
+  const chatHandler = () => {
+    window.location = "http://localhost:9000/adminPage/chat";
+  };
+
   useEffect(() => {}, [appContext]);
 
   return (
@@ -22,14 +26,17 @@ const Matches = () => {
           {appContext.matchedUsers.length > 0 ? (
             appContext.matchedUsers.map((user) => {
               return (
-                <div className="match-box">
+                <div key={user.id} className="match-box">
                   <div className="matched-user">
                     <div className="matched-image"></div>
                     <div className="matched-info">
                       {`${user.name} ${user.surname}`}
                     </div>
                   </div>
-                  <button className="button nav-button match-button">
+                  <button
+                    className="button nav-button match-button"
+                    onClick={() => chatHandler()}
+                  >
                     Chat With User
                   </button>
                 </div>

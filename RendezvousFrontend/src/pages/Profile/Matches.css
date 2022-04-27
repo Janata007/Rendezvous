@@ -23,6 +23,12 @@
   justify-content: space-around;
 }
 
+.matches-container p {
+  color: var(--text);
+  font-size: var(--lg);
+  text-align: center;
+}
+
 .match-box {
   display: flex;
   flex-direction: column;

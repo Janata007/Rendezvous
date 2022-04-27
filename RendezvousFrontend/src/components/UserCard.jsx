@@ -12,6 +12,7 @@ const UserCard = () => {
   const [matchPercent, setMatchPercent] = useState(0);
 
   const likeHandler = () => {
+    console.log("liked");
     RendezvousService.likeUser(appContext.activeUser.id, appContext.users[0].id)
       .then((response) => {
         let likedUser = appContext.users[0];

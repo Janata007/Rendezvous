@@ -156,13 +156,12 @@ export const appReducer = (state, action) => {
       return { ...state, dislikedUsers: dislikedUsers };
 
     case "MATCHED_USER":
-      console.log("match event");
       let newlyMatchedUser = action.matchedUser;
-      let matchedUsers = state.matchedUsers;
 
-      matchedUsers.push(newlyMatchedUser);
-
-      return { ...state, matchedUsers: matchedUsers };
+      return {
+        ...state,
+        matchedUsers: [...state.matchedUsers, newlyMatchedUser],
+      };
     default:
       return defaultAppState;
   }
