@@ -40,6 +40,11 @@ public class AdminPageController {
         return "add-template";
     }
 
+    @GetMapping("/chat")
+    public String goToChat(){
+        return "index";
+    }
+
     @PostMapping("/add")
     public String saveUser(
         @RequestParam(required = false) Long id,
