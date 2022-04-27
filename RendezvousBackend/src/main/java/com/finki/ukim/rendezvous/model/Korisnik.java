@@ -1,9 +1,12 @@
 package com.finki.ukim.rendezvous.model;
 
 import com.finki.ukim.rendezvous.model.enums.AppUserRole;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,13 +46,13 @@ public class Korisnik implements UserDetails {
 
     private String username;
 
-    private String email;
+    private String email ="";
 
     private String password;
 
-    private String city;
+    private String city ="";
 
-    private String ipAddress;
+    private String ipAddress ="";
 
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
@@ -58,25 +61,25 @@ public class Korisnik implements UserDetails {
     @JoinTable(name = "korisnici_sports",
         joinColumns = @JoinColumn(name = "korisnik_id"),
         inverseJoinColumns = @JoinColumn(name = "sport_id"))
-    private Set<Sports> sports;
+    private Set<Sports> sports=new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "korisnici_hobbies",
         joinColumns = @JoinColumn(name = "korisnik_id"),
         inverseJoinColumns = @JoinColumn(name = "hobby_id"))
-    private Set<Hobbies> hobbies;
+    private Set<Hobbies> hobbies = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "korisnici_locations",
         joinColumns = @JoinColumn(name = "korisnik_id"),
         inverseJoinColumns = @JoinColumn(name = "location_id"))
-    private Set<Locations> locations;
+    private Set<Locations> locations = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "korisnici_music_genres",
         joinColumns = @JoinColumn(name = "korisnik_id"),
         inverseJoinColumns = @JoinColumn(name = "music_genre_id"))
-    private Set<MusicGenres> musicGenres;
+    private Set<MusicGenres> musicGenres=new HashSet<>();
 
 
     @Enumerated(EnumType.STRING)
@@ -97,6 +100,10 @@ public class Korisnik implements UserDetails {
         this.appUserRole = appUserRole;
         this.locked = true;
         this.enabled = true;
+        this.sports=new HashSet<>();
+        this.locations=new HashSet<>();
+        this.musicGenres=new HashSet<>();
+        this.hobbies=new HashSet<>();
     }
 
     public Korisnik(String name, String surname, String username, String password, AppUserRole appUserRole) {
@@ -107,6 +114,11 @@ public class Korisnik implements UserDetails {
         this.appUserRole = appUserRole;
         this.locked = true;
         this.enabled = true;
+        this.email = "";
+        this.sports=new HashSet<>();
+        this.locations=new HashSet<>();
+        this.musicGenres=new HashSet<>();
+        this.hobbies=new HashSet<>();
     }
 
     @Override
