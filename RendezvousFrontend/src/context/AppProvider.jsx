@@ -22,23 +22,9 @@ export const appReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
       return { ...state, isLoggedIn: true, activeUser: { ...action.user } };
+
     case "LOGOUT":
-      return {
-        ...state,
-        isLoggedIn: false,
-        activeUser: {
-          id: null,
-          username: "",
-          name: "",
-          surname: "",
-          email: "",
-          city: "",
-          hobbies: [],
-          sports: [],
-          musicGenres: [],
-          locations: [],
-        },
-      };
+      return defaultAppState;
 
     case "ADD_HOBBY":
       let hobbyToBePushed = { id: action.hobby.id, hobby: action.hobby.hobby };
@@ -149,8 +135,10 @@ export const appReducer = (state, action) => {
       action.users.forEach((user) => {
         if (user.username !== state.activeUser.username) state.users.push(user);
       });
+      console.log("in load users");
 
       return { ...state };
+
     default:
       return defaultAppState;
   }

@@ -66,17 +66,20 @@ const Login = () => {
               },
             });
 
-            RendezvousService.fetchAllUsers()
-              .then((response) => {
-                return response.data;
-              })
-              .then((data) => {
-                appContext.dispatch({ type: "LOAD_USERS", users: data });
-                navigate("/");
-                setRequestVal(true);
-              })
-              .catch((error) => console.log(error));
+            return data;
           } else setRequestVal(false);
+        })
+        .then((data) => {
+          RendezvousService.fetchAllUsers()
+            .then((response) => {
+              return response.data;
+            })
+            .then((data) => {
+              appContext.dispatch({ type: "LOAD_USERS", users: data });
+              navigate("/");
+              setRequestVal(true);
+            })
+            .catch((error) => console.log(error));
         })
         .catch((error) => {
           setRequestVal(false);

@@ -9,6 +9,7 @@ const UserCard = () => {
   const appContext = useContext(AppContext);
 
   const [matchPercent, setMatchPercent] = useState(0);
+  const [userShown, setUserShown] = useState({});
 
   const fetchMatchPercent = (userId, shownUserId) => {
     RendezvousService.getMatchPercentForUsers(userId, shownUserId)
@@ -37,17 +38,23 @@ const UserCard = () => {
   };
 
   useEffect(() => {
-    fetchMatchPercent(appContext.activeUser.id, appContext.users[0].id);
-  }, [appContext]);
+    let userShown = {
+      ...appContext.users[0],
+    };
+
+    console.log('in use effect')
+    setUserShown(userShown);
+
+    fetchMatchPercent(appContext.activeUser.id, userShown.id);
+    return () => {};
+  }, [appContext.activeUser, appContext.users]);
 
   return (
     <>
       <div className="user-card">
         <div className="user-image"></div>
         <section className="user-info">
-          <h4 className="name">
-            {`${appContext.users[0].name} ${appContext.users[0].surname}`}
-          </h4>
+          <h4 className="name">{`${userShown.name} ${userShown.surname}`}</h4>
           <p className="desc">
             According to common interests, this user is a{" "}
             <span className="percent">{matchPercent}% </span>match.
