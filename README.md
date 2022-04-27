@@ -28,3 +28,6 @@ MatchService - additional service meant for calculating the percent of which one
 ### Web
 there are rest controllers for all entity models defined above
 MatchController - additional controller for getting the percent of a match for users
+
+### Video example:
+https://www.youtube.com/watch?v=3xVkutVFPrQ
