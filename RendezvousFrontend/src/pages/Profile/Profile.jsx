@@ -16,7 +16,12 @@ const Profile = () => {
     surname: "",
     email: "",
     city: "",
+    geoLocation: "",
   });
+
+  const checkGeoLocation = () => {
+    return user.geoLocation.search("unsupported");
+  };
 
   useEffect(() => {
     setUser({
@@ -25,6 +30,7 @@ const Profile = () => {
       surname: appContext.activeUser.surname,
       email: appContext.activeUser.email,
       city: appContext.activeUser.city,
+      geoLocation: appContext.activeUser.geoLocation,
     });
   }, [appContext]);
 
@@ -47,7 +53,9 @@ const Profile = () => {
 
           <div className="personal-row">
             <p className="city-label">Lives in:</p>
-            <span className="city">{user.city}</span>
+            <p className={`city ${checkGeoLocation() ? "invalid" : ""}`}>
+              {user.geoLocation}
+            </p>
           </div>
         </Card>
       </section>

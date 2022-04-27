@@ -3,6 +3,8 @@ import AppContext from "./app-context";
 
 export const defaultAppState = {
   users: [],
+  likedUsers: [],
+  dislikedUsers: [],
   activeUser: {
     id: null,
     username: "",
@@ -19,126 +21,132 @@ export const defaultAppState = {
 };
 
 export const appReducer = (state, action) => {
+  const addEnum = (id, value, enumType, enumArray) => {
+    let enumToBePushed = { id: id };
+    enumToBePushed[enumType] = value;
+
+    if (
+      !state.activeUser[enumArray].some(
+        (el) => el[enumType] === enumToBePushed[enumType]
+      )
+    )
+      state.activeUser[enumArray].push(enumToBePushed);
+  };
+
+  const removeEnum = (id, enumArray) => {
+    let enumToBeRemoved = { id: id };
+
+    let newUserHobbies = state.activeUser[enumArray].filter(
+      (el) => el.id !== enumToBeRemoved.id
+    );
+
+    state.activeUser[enumArray] = newUserHobbies;
+  };
+
   switch (action.type) {
+    //AUTH
     case "LOGIN":
       return { ...state, isLoggedIn: true, activeUser: { ...action.user } };
 
     case "LOGOUT":
       return defaultAppState;
 
-    case "ADD_HOBBY":
-      let hobbyToBePushed = { id: action.hobby.id, hobby: action.hobby.hobby };
+    case "ADD_GEOLOCATION":
+      let location;
+      action.geoLocation === "UNKNOWN"
+        ? (location = "This location is unsupported at the moment")
+        : (location = action.geoLocation);
 
-      if (
-        !state.activeUser.hobbies.some(
-          (hobby) => hobby.hobby === hobbyToBePushed.hobby
-        )
-      )
-        state.activeUser.hobbies.push(hobbyToBePushed);
+      state.activeUser.geoLocation = location;
+
+      return { ...state };
+
+    //ENUMS
+    case "ADD_HOBBY":
+      addEnum(action.hobby.id, action.hobby.hobby, "hobby", "hobbies");
 
       return { ...state };
 
     case "REMOVED_HOBBY":
-      let hobbyToBeRemoved = { id: action.hobby.id, hobby: action.hobby.hobby };
-
-      let newUserHobbies = state.activeUser.hobbies.filter(
-        (hobby) => hobby.id !== hobbyToBeRemoved.id
-      );
-
-      state.activeUser.hobbies = newUserHobbies;
+      removeEnum(action.hobby.id, "hobbies");
 
       return { ...state };
 
     case "ADD_SPORT":
-      let sportToBePushed = { id: action.sport.id, sport: action.sport.sport };
-
-      if (
-        !state.activeUser.sports.some(
-          (sport) => sport.sport === sportToBePushed.sport
-        )
-      )
-        state.activeUser.sports.push(sportToBePushed);
+      addEnum(action.sport.id, action.sport.sport, "sport", "sports");
 
       return { ...state };
 
     case "REMOVED_SPORT":
-      let sportToBeRemoved = { id: action.sport.id, sport: action.sport.sport };
-
-      let newUserSports = state.activeUser.sports.filter(
-        (sport) => sport.id !== sportToBeRemoved.id
-      );
-
-      state.activeUser.sports = newUserSports;
+      removeEnum(action.sport.id, "sports");
 
       return { ...state };
 
     case "ADD_MUSIC_GENRE":
-      let musicGenreToBePushed = {
-        id: action.musicGenre.id,
-        musicGenre: action.musicGenre.musicGenre,
-      };
-
-      if (
-        !state.activeUser.musicGenres.some(
-          (musicGenre) =>
-            musicGenre.musicGenre === musicGenreToBePushed.musicGenre
-        )
-      )
-        state.activeUser.musicGenres.push(musicGenreToBePushed);
+      addEnum(
+        action.musicGenre.id,
+        action.musicGenre.musicGenre,
+        "musicGenre",
+        "musicGenres"
+      );
 
       return { ...state };
 
     case "REMOVED_MUSIC_GENRE":
-      let musicGenreToBeRemoved = {
-        id: action.musicGenre.id,
-        musicGenre: action.musicGenre.musicGenre,
-      };
-
-      let newUserMusicGenres = state.activeUser.musicGenres.filter(
-        (musicGenre) => musicGenre.id !== musicGenreToBeRemoved.id
-      );
-
-      state.activeUser.musicGenres = newUserMusicGenres;
+      removeEnum(action.musicGenre.id, "musicGenres");
 
       return { ...state };
 
     case "ADD_LOCATION":
-      let locationToBePushed = {
-        id: action.location.id,
-        location: action.location.location,
-      };
-
-      if (
-        !state.activeUser.locations.some(
-          (location) => location.location === locationToBePushed.location
-        )
-      )
-        state.activeUser.locations.push(locationToBePushed);
+      addEnum(
+        action.location.id,
+        action.location.location,
+        "location",
+        "locations"
+      );
 
       return { ...state };
 
     case "REMOVED_LOCATION":
-      let locationToBeRemoved = {
-        id: action.location.id,
-        location: action.location.location,
-      };
+      removeEnum(action.location.id, "locations");
 
-      let newUserLocations = state.activeUser.locations.filter(
-        (location) => location.id !== locationToBeRemoved.id
+      return { ...state };
+
+    //EVENTS
+    case "LOAD_USERS":
+      state.users = action.users.filter(
+        (user) => user.id !== state.activeUser.id
       );
 
-      state.activeUser.locations = newUserLocations;
-
       return { ...state };
 
-    case "LOAD_USERS":
-      action.users.forEach((user) => {
-        if (user.username !== state.activeUser.username) state.users.push(user);
-      });
-      console.log("in load users");
+    case "SKIPPED_USER":
+      let userToBeSkipped = action.user;
+      let usersPresent = state.users;
 
-      return { ...state };
+      usersPresent.push(
+        usersPresent.splice(usersPresent.indexOf(userToBeSkipped), 1)[0]
+      );
 
+      return { ...state, users: usersPresent };
+
+    case "LIKED_USER":
+      let newlyLikedUser = action.likedUser;
+      let likedUsers = state.likedUsers;
+
+      likedUsers.push(newlyLikedUser);
+      state.users.shift();
+
+      return { ...state, likedUsers: likedUsers };
+
+    case "DISLIKED_USER":
+      let newlyDislikedUser = action.dislikedUser;
+      let dislikedUsers = state.dislikedUsers;
+
+      dislikedUsers.push(newlyDislikedUser);
+      state.users.shift();
+
+      return { ...state, dislikedUsers: dislikedUsers };
     default:
       return defaultAppState;
   }

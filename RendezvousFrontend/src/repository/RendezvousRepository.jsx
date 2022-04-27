@@ -2,16 +2,32 @@ import axios from "../custom/axios";
 
 const RendezvousService = {
   //users
-  createUser: () => {
-    return axios.post("/korisniciApi/users", "");
+  createUser: (newUser) => {
+    return axios.request({
+      url: "korisniciApi/users",
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      data: newUser,
+    });
   },
 
   fetchAllUsers: () => {
     return axios.get("/korisniciApi/users");
   },
 
+  fetchAllUsersForLoggedInUser: (userId) => {
+    return axios.get(`/korisniciApi/users/${userId}/search`);
+  },
+
   fetchUserByUsername: (username) => {
     return axios.get(`/korisniciApi/users/username/${username}`);
+  },
+
+  fetchGeoLocation: () => {
+    return axios.get("/korisniciApi/geoIP");
   },
 
   //hobbies, sports, music genres, locations
@@ -61,6 +77,15 @@ const RendezvousService = {
 
   removeLocationFromUser: (locationId, userId) => {
     return axios.delete(`/korisniciApi/${userId}/locations/${locationId}`);
+  },
+
+  //likes
+  likeUser: (userId, likedUserId) => {
+    return axios.post(`/likesApi/user/${userId}/likes/${likedUserId}`);
+  },
+
+  dislikeUser: (userId, dislikedUserId) => {
+    return axios.post(`/likesApi/user/${userId}/dislikes/${dislikedUserId}`);
   },
 
   //match
