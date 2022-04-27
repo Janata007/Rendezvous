@@ -4,7 +4,7 @@
 .register-form {
   display: flex;
   flex-direction: column;
-  gap: var(--xl-margin);
+  gap: var(--lg-margin);
 }
 
 .register-input {

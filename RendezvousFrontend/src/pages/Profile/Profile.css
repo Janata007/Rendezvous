@@ -32,6 +32,7 @@
 .personal-row {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   color: var(--accent-dark);
 }
 
@@ -39,6 +40,10 @@
 .city {
   font-style: italic;
   font-weight: bold;
+}
+
+.city.invalid {
+  font-size: var(--xxs);
 }
 
 .edit-title {

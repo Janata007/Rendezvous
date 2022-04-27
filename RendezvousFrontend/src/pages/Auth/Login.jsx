@@ -81,7 +81,21 @@ const Login = () => {
             })
             .catch((error) => console.log(error));
         })
+        .then(() => {
+          RendezvousService.fetchGeoLocation()
+            .then((response) => {
+              return response.data;
+            })
+            .then((data) => {
+              appContext.dispatch({
+                type: "ADD_GEOLOCATION",
+                geoLocation: data,
+              });
+            })
+            .catch((error) => console.log(error));
+        })
         .catch((error) => {
+          console.log(error);
           setRequestVal(false);
         });
     }

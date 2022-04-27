@@ -3,75 +3,98 @@ import { FcLike, FcDislike } from "react-icons/fc";
 import { TiArrowRightThick } from "react-icons/ti";
 import AppContext from "../context/app-context";
 import RendezvousService from "../repository/RendezvousRepository";
+import Card from "./Helper/Card";
 import "./UserCard.css";
 
 const UserCard = () => {
   const appContext = useContext(AppContext);
 
   const [matchPercent, setMatchPercent] = useState(0);
-  const [userShown, setUserShown] = useState({});
-
-  const fetchMatchPercent = (userId, shownUserId) => {
-    RendezvousService.getMatchPercentForUsers(userId, shownUserId)
-      .then((response) => {
-        return response.data;
-      })
-      .then((data) => {
-        console.log(data);
-        setMatchPercent(data.toFixed(0));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
   const likeHandler = () => {
-    console.log("liked");
+    RendezvousService.likeUser(appContext.activeUser.id, appContext.users[0].id)
+      .then((response) => {
+        appContext.dispatch({
+          type: "LIKED_USER",
+          likedUser: appContext.users[0],
+        });
+      })
+      .catch((error) => console.log(error));
   };
 
   const dislikeHandler = () => {
-    console.log("disliked");
+    RendezvousService.dislikeUser(
+      appContext.activeUser.id,
+      appContext.users[0].id
+    )
+      .then((response) => {
+        appContext.dispatch({
+          type: "DISLIKED_USER",
+          dislikedUser: appContext.users[0],
+        });
+      })
+      .catch((error) => console.log(error));
   };
 
   const skipHandler = () => {
-    console.log("skipped");
+    let userToBeSkipped = appContext.users[0];
+
+    appContext.dispatch({ type: "SKIPPED_USER", user: userToBeSkipped });
   };
 
   useEffect(() => {
-    let userShown = {
-      ...appContext.users[0],
+    const fetchMatchPercent = () => {
+      RendezvousService.getMatchPercentForUsers(
+        appContext.activeUser.id,
+        appContext.users[0].id
+      )
+        .then((response) => {
+          return response.data;
+        })
+        .then((data) => {
+          setMatchPercent(data.toFixed(0));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     };
 
-    console.log('in use effect')
-    setUserShown(userShown);
-
-    fetchMatchPercent(appContext.activeUser.id, userShown.id);
-    return () => {};
-  }, [appContext.activeUser, appContext.users]);
+    if (appContext.users.length > 0) fetchMatchPercent();
+  }, [appContext]);
 
   return (
     <>
-      <div className="user-card">
-        <div className="user-image"></div>
-        <section className="user-info">
-          <h4 className="name">{`${userShown.name} ${userShown.surname}`}</h4>
-          <p className="desc">
-            According to common interests, this user is a{" "}
-            <span className="percent">{matchPercent}% </span>match.
-          </p>
-        </section>
-      </div>
-      <div className="user-actions">
-        <div className="action-button" onClick={() => likeHandler()}>
-          <FcLike />
-        </div>
-        <div className="action-button" onClick={() => dislikeHandler()}>
-          <FcDislike />
-        </div>
-        <div className="action-button" onClick={() => skipHandler()}>
-          <TiArrowRightThick />
-        </div>
-      </div>
+      {appContext.users.length > 0 ? (
+        <>
+          <div className="user-card">
+            <div className="user-image"></div>
+            <section className="user-info">
+              <h4 className="name">{`${appContext.users[0].name} ${appContext.users[0].surname}`}</h4>
+              <p className="desc">
+                According to common interests, this user is a{" "}
+                <span className="percent">{matchPercent}% </span>match.
+              </p>
+            </section>
+          </div>
+          <div className="user-actions">
+            <div className="action-button" onClick={() => dislikeHandler()}>
+              <FcDislike />
+            </div>
+            <div className="action-button" onClick={() => likeHandler()}>
+              <FcLike />
+            </div>
+            <div className="action-button" onClick={() => skipHandler()}>
+              <TiArrowRightThick />
+            </div>
+          </div>
+        </>
+      ) : (
+        <Card>
+          <h1 className="empty-title">
+            There seems to be no one around currently, check back later :)
+          </h1>
+        </Card>
+      )}
     </>
   );
 };

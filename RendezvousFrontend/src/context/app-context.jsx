@@ -4,6 +4,8 @@ const AppContext = createContext({
   isLoggedIn: false,
   activeUser: {},
   users: [],
+  likedUsers: [],
+  dislikedUsers: [],
 });
 
 export default AppContext;

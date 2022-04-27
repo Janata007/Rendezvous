@@ -5,12 +5,13 @@
   /** FONT STYLES */
   --rubik: "Rubik", sans-serif;
 
+  --xxs: 10px;
   --xs: 12px;
   --s: 14px;
   --md: 16px;
   --lg: 18px;
   --xl: 22px;
-  --xxl: 2rem;
+  --xxl: 1.75rem;
   --big: 3rem;
   --huge: 5rem;
   --icon: 30px;
