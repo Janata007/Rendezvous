@@ -1,40 +1,19 @@
 package com.finki.ukim.rendezvous.controller;
 
-import com.finki.ukim.rendezvous.exceptions.HobbyNotFoundException;
-import com.finki.ukim.rendezvous.exceptions.LocationNotFoundException;
-import com.finki.ukim.rendezvous.exceptions.MusicGenreNotFoundException;
-import com.finki.ukim.rendezvous.exceptions.SportNotFoundException;
-import com.finki.ukim.rendezvous.exceptions.UserNotFoundException;
-import com.finki.ukim.rendezvous.model.Hobbies;
-import com.finki.ukim.rendezvous.model.Korisnik;
-import com.finki.ukim.rendezvous.model.Likes;
-import com.finki.ukim.rendezvous.model.Locations;
-import com.finki.ukim.rendezvous.model.MusicGenres;
-import com.finki.ukim.rendezvous.model.Sports;
-import com.finki.ukim.rendezvous.service.HobbiesService;
-import com.finki.ukim.rendezvous.service.KorisnikService;
-import com.finki.ukim.rendezvous.service.LikesService;
-import com.finki.ukim.rendezvous.service.LocationsService;
-import com.finki.ukim.rendezvous.service.MusicGenreService;
-import com.finki.ukim.rendezvous.service.SportsService;
+import com.finki.ukim.rendezvous.exceptions.*;
+import com.finki.ukim.rendezvous.model.*;
+import com.finki.ukim.rendezvous.service.*;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3001"})
@@ -63,7 +42,7 @@ public class KorisnikController {
     Korisnik addSportForUser(@PathVariable long sportId, @PathVariable long korisnikId) {
         Sports sport = this.sportsService.findById(sportId).orElseThrow(() -> new SportNotFoundException(sportId));
         Korisnik korisnik =
-            this.korisnikService.findById(korisnikId).orElseThrow(() -> new UserNotFoundException(korisnikId));
+                this.korisnikService.findById(korisnikId).orElseThrow(() -> new UserNotFoundException(korisnikId));
         korisnik.addSport(sport);
         return this.korisnikService.save(korisnik);
     }
@@ -72,7 +51,7 @@ public class KorisnikController {
     Korisnik deleteSportForUser(@PathVariable long sportId, @PathVariable long korisnikId) {
         Sports sport = this.sportsService.findById(sportId).orElseThrow(() -> new SportNotFoundException(sportId));
         Korisnik korisnik =
-            this.korisnikService.findById(korisnikId).orElseThrow(() -> new UserNotFoundException(korisnikId));
+                this.korisnikService.findById(korisnikId).orElseThrow(() -> new UserNotFoundException(korisnikId));
         korisnik.deleteSport(sport);
         return this.korisnikService.save(korisnik);
     }
@@ -81,7 +60,7 @@ public class KorisnikController {
     Korisnik addHobbyForUser(@PathVariable long hobbyId, @PathVariable long korisnikId) {
         Hobbies hobby = this.hobbiesService.findById(hobbyId).orElseThrow(() -> new HobbyNotFoundException(hobbyId));
         Korisnik korisnik =
-            this.korisnikService.findById(korisnikId).orElseThrow(() -> new UserNotFoundException(korisnikId));
+                this.korisnikService.findById(korisnikId).orElseThrow(() -> new UserNotFoundException(korisnikId));
         korisnik.addHobby(hobby);
         return this.korisnikService.save(korisnik);
     }
@@ -90,7 +69,7 @@ public class KorisnikController {
     Korisnik deleteHobbyForUser(@PathVariable long hobbyId, @PathVariable long korisnikId) {
         Hobbies hobby = this.hobbiesService.findById(hobbyId).orElseThrow(() -> new HobbyNotFoundException(hobbyId));
         Korisnik korisnik =
-            this.korisnikService.findById(korisnikId).orElseThrow(() -> new UserNotFoundException(korisnikId));
+                this.korisnikService.findById(korisnikId).orElseThrow(() -> new UserNotFoundException(korisnikId));
         korisnik.deleteHobby(hobby);
         return this.korisnikService.save(korisnik);
     }
@@ -98,9 +77,9 @@ public class KorisnikController {
     @PutMapping("/{korisnikId}/locations/{locationId}")
     Korisnik addLocationForUser(@PathVariable long locationId, @PathVariable long korisnikId) {
         Locations location =
-            this.locationsService.findById(locationId).orElseThrow(() -> new LocationNotFoundException(locationId));
+                this.locationsService.findById(locationId).orElseThrow(() -> new LocationNotFoundException(locationId));
         Korisnik korisnik =
-            this.korisnikService.findById(korisnikId).orElseThrow(() -> new UserNotFoundException(korisnikId));
+                this.korisnikService.findById(korisnikId).orElseThrow(() -> new UserNotFoundException(korisnikId));
         korisnik.addLocation(location);
         return this.korisnikService.save(korisnik);
     }
@@ -108,9 +87,9 @@ public class KorisnikController {
     @DeleteMapping("/{korisnikId}/locations/{locationId}")
     Korisnik deleteLocationForUser(@PathVariable long locationId, @PathVariable long korisnikId) {
         Locations location =
-            this.locationsService.findById(locationId).orElseThrow(() -> new LocationNotFoundException(locationId));
+                this.locationsService.findById(locationId).orElseThrow(() -> new LocationNotFoundException(locationId));
         Korisnik korisnik =
-            this.korisnikService.findById(korisnikId).orElseThrow(() -> new UserNotFoundException(korisnikId));
+                this.korisnikService.findById(korisnikId).orElseThrow(() -> new UserNotFoundException(korisnikId));
         korisnik.deleteLocation(location);
         return this.korisnikService.save(korisnik);
     }
@@ -118,9 +97,9 @@ public class KorisnikController {
     @PutMapping("/{korisnikId}/music/{musicId}")
     Korisnik addMusicForUser(@PathVariable long musicId, @PathVariable long korisnikId) {
         MusicGenres musicGenre =
-            this.musicGenreService.findById(musicId).orElseThrow(() -> new MusicGenreNotFoundException(musicId));
+                this.musicGenreService.findById(musicId).orElseThrow(() -> new MusicGenreNotFoundException(musicId));
         Korisnik korisnik =
-            this.korisnikService.findById(korisnikId).orElseThrow(() -> new UserNotFoundException(korisnikId));
+                this.korisnikService.findById(korisnikId).orElseThrow(() -> new UserNotFoundException(korisnikId));
         korisnik.addMusicGenre(musicGenre);
         return this.korisnikService.save(korisnik);
     }
@@ -128,9 +107,9 @@ public class KorisnikController {
     @DeleteMapping("/{korisnikId}/music/{musicId}")
     Korisnik deleteMusicForUser(@PathVariable long musicId, @PathVariable long korisnikId) {
         MusicGenres musicGenre =
-            this.musicGenreService.findById(musicId).orElseThrow(() -> new MusicGenreNotFoundException(musicId));
+                this.musicGenreService.findById(musicId).orElseThrow(() -> new MusicGenreNotFoundException(musicId));
         Korisnik korisnik =
-            this.korisnikService.findById(korisnikId).orElseThrow(() -> new UserNotFoundException(korisnikId));
+                this.korisnikService.findById(korisnikId).orElseThrow(() -> new UserNotFoundException(korisnikId));
         korisnik.deleteMusicGenre(musicGenre);
         return this.korisnikService.save(korisnik);
     }
@@ -190,6 +169,18 @@ public class KorisnikController {
         }
     }
 
+    @GetMapping("/users/username/{username}/{password}")
+    public ResponseEntity<Korisnik> getUserByUsernameAndPassword(@PathVariable("username") String username, @PathVariable("password") String password) {
+        Optional<Korisnik> korisnikData = this.korisnikService.findByUsername(username);
+        if (korisnikData.isPresent()) {
+            if (korisnikData.get().getPassword().equals(password)) {
+                return new ResponseEntity<Korisnik>(korisnikData.get(), HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+
+    }
+
     @PutMapping("/updateKorisnik/{id}")
     public ResponseEntity<Korisnik> edit(@PathVariable Long id, @RequestBody Korisnik korisnik) {
         try {
@@ -210,8 +201,8 @@ public class KorisnikController {
                 }
             }
             Korisnik _korisnik = this.korisnikService
-                .save(new Korisnik( korisnik.getName(), korisnik.getSurname(), korisnik.getUsername(), korisnik.getPassword(),
-                    korisnik.getAppUserRole()));
+                    .save(new Korisnik(korisnik.getName(), korisnik.getSurname(), korisnik.getUsername(), korisnik.getPassword(),
+                            korisnik.getAppUserRole()));
             return new ResponseEntity<>(_korisnik, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
