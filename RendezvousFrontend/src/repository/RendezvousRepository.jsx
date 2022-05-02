@@ -99,6 +99,17 @@ const RendezvousService = {
       },
     });
   },
+
+  areUsersMatched: (userIdOne, userIdTwo) => {
+    return axios.request({
+      url: "matchApi/match/",
+      method: "get",
+      params: {
+        id1: userIdOne,
+        id2: userIdTwo,
+      },
+    });
+  },
 };
 
 export default RendezvousService;

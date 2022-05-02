@@ -17,10 +17,15 @@ const Profile = () => {
     email: "",
     city: "",
     geoLocation: "",
+    authority: "",
   });
 
   const checkGeoLocation = () => {
     return user.geoLocation.search("unsupported");
+  };
+
+  const adminRedirectHandler = () => {
+    window.location = "http://localhost:9000/adminPage";
   };
 
   useEffect(() => {
@@ -31,6 +36,7 @@ const Profile = () => {
       email: appContext.activeUser.email,
       city: appContext.activeUser.city,
       geoLocation: appContext.activeUser.geoLocation,
+      authority: appContext.activeUser.authority,
     });
   }, [appContext]);
 
@@ -77,6 +83,14 @@ const Profile = () => {
       </Card>
 
       <Button text="Back to Homepage" navigateTo="" />
+      {user.authority === "ADMIN" ? (
+        <button
+          className="button nav-button"
+          onClick={() => adminRedirectHandler()}
+        >
+          Go To Admin Page
+        </button>
+      ) : null}
     </div>
   );
 };

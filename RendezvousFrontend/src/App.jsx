@@ -10,6 +10,7 @@ import EditMusicGenres from "./pages/Profile/EditMusicGenres";
 import EditSports from "./pages/Profile/EditSports";
 import Profile from "./pages/Profile/Profile";
 import Register from "./pages/Auth/Register";
+import Matches from "./pages/Profile/Matches";
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
             element={<EditMusicGenres />}
           />
           <Route path="/profile/editLocations" element={<EditLocations />} />
+          <Route path="/matches" element={<Matches />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

@@ -11,7 +11,7 @@ const Header = () => {
         <li className="header-item">
           <div
             className="profile-link"
-            onClick={() => navigate("profile")}
+            onClick={() => navigate("/profile")}
           ></div>
         </li>
         <li className="header-item">

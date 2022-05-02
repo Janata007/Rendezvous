@@ -1,12 +1,14 @@
 body,html {
     margin: 0;
-    background-color: rgba(40, 42, 54, 1) !important;
+   /* background-color: rgba(40, 42, 54, 1) !important;*/
+    background-color: #f24a72 !important;
 }
 
 .card {
     height: 500px;
     border-radius: 15px !important;
-    background-color: rgba(0,0,0,0.4) !important;
+   /* background-color: rgba(0,0,0,0.4) !important;*/
+    background-color: #e7c990 !important;
 }
 
 .card-body {
@@ -43,12 +45,12 @@ body,html {
 
 .chat-summary span {
     font-size: 20px;
-    color: white;
+    color: #282c35;
 }
 
 .chat-summary p {
     font-size: 10px;
-    color: rgba(255,255,255,0.6);
+    color: #282c35;
 }
 
 .msg_container_send {
@@ -58,22 +60,22 @@ body,html {
     border-radius: 25px;
     padding: 10px;
     position: relative;
-    color:white;
+    color:#282c35;
 }
 
 .msg_time_send {
     position: absolute;
     right:0;
     bottom: -20px;
-    color: rgba(255,255,255,0.5);
+    color: #282c35;
     font-size: 10px;
     width: max-content;
 }
 
 .all-input {
-    background-color: rgba(0,0,0,0.3) !important;
+    background-color: #e7c990 !important;
     border:0 !important;
-    color:white !important;
+    color:#282c35 !important;
     height: 60px !important;
     overflow-y: auto;
 }
@@ -85,9 +87,9 @@ body,html {
 }
 
 button {
-    background-color: rgba(0,0,0,0.3) !important;
+    background-color: #e7c990 !important;
     border:0 !important;
-    color:white !important;
+    color:#282c35 !important;
     border-radius: 0 5px 5px 0 !important;
 }
 
@@ -107,10 +109,10 @@ button {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  color: white;
+  color: #282c35;
   text-align: center;
   font-size: 1.5em;
   vertical-align: middle;
   margin:3px;
-  border:1.5px solid #f5f6fa;
+  border:1.5px solid #282c35;
 }

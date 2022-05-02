@@ -21,6 +21,7 @@
   height: 100%;
 }
 
+.match-container,
 .logout-container {
   display: flex;
   flex-direction: column;
@@ -28,11 +29,13 @@
   align-items: center;
 }
 
+.match-container p,
 .logout-container p {
   font-size: var(--md);
   color: var(--accent-dark);
 }
 
+.match-container svg,
 .logout-container svg {
   width: 30px;
   height: 30px;

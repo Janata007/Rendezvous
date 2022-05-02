@@ -5,6 +5,7 @@ export const defaultAppState = {
   users: [],
   likedUsers: [],
   dislikedUsers: [],
+  matchedUsers: [],
   activeUser: {
     id: null,
     username: "",
@@ -12,6 +13,7 @@ export const defaultAppState = {
     surname: "",
     email: "",
     city: "",
+    authority: "",
     hobbies: [],
     sports: [],
     musicGenres: [],
@@ -46,7 +48,12 @@ export const appReducer = (state, action) => {
   switch (action.type) {
     //AUTH
     case "LOGIN":
-      return { ...state, isLoggedIn: true, activeUser: { ...action.user } };
+      return {
+        ...state,
+        isLoggedIn: true,
+        activeUser: { ...action.user },
+        matchedUsers: [],
+      };
 
     case "LOGOUT":
       return defaultAppState;
@@ -147,6 +154,14 @@ export const appReducer = (state, action) => {
       state.users.shift();
 
       return { ...state, dislikedUsers: dislikedUsers };
+
+    case "MATCHED_USER":
+      let newlyMatchedUser = action.matchedUser;
+
+      return {
+        ...state,
+        matchedUsers: [...state.matchedUsers, newlyMatchedUser],
+      };
     default:
       return defaultAppState;
   }
@@ -159,6 +174,10 @@ const AppProvider = ({ children }) => {
     isLoggedIn: appState.isLoggedIn,
     activeUser: appState.activeUser,
     users: appState.users,
+    likedUsers: appState.likedUsers,
+    dislikedUsers: appState.dislikedUsers,
+    matchedUsers: appState.matchedUsers,
+
     dispatch: dispatch,
   };
 
