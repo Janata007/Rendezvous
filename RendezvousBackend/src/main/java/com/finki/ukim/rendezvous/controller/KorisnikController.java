@@ -210,8 +210,7 @@ public class KorisnikController {
                 }
             }
             Korisnik _korisnik = this.korisnikService
-                .save(new Korisnik(korisnik.getPassword(), korisnik.getUsername(), korisnik.getName(),
-                    korisnik.getSurname(),
+                .save(new Korisnik( korisnik.getName(), korisnik.getSurname(), korisnik.getUsername(), korisnik.getPassword(),
                     korisnik.getAppUserRole()));
             return new ResponseEntity<>(_korisnik, HttpStatus.CREATED);
         } catch (Exception e) {
