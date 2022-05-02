@@ -13,6 +13,7 @@ export const defaultAppState = {
     surname: "",
     email: "",
     city: "",
+    geoLocation: "",
     authority: "",
     hobbies: [],
     sports: [],
@@ -129,31 +130,27 @@ export const appReducer = (state, action) => {
 
     case "SKIPPED_USER":
       let userToBeSkipped = action.user;
-      let usersPresent = state.users;
 
-      usersPresent.push(
-        usersPresent.splice(usersPresent.indexOf(userToBeSkipped), 1)[0]
+      state.users.push(
+        state.users.splice(state.users.indexOf(userToBeSkipped), 1)[0]
       );
 
-      return { ...state, users: usersPresent };
+      return { ...state };
 
     case "LIKED_USER":
       let newlyLikedUser = action.likedUser;
-      let likedUsers = state.likedUsers;
-
-      likedUsers.push(newlyLikedUser);
       state.users.shift();
 
-      return { ...state, likedUsers: likedUsers };
+      return { ...state, likedUsers: [...state.likedUsers, newlyLikedUser] };
 
     case "DISLIKED_USER":
       let newlyDislikedUser = action.dislikedUser;
-      let dislikedUsers = state.dislikedUsers;
-
-      dislikedUsers.push(newlyDislikedUser);
       state.users.shift();
 
-      return { ...state, dislikedUsers: dislikedUsers };
+      return {
+        ...state,
+        dislikedUsers: [...state.dislikedUsers, newlyDislikedUser],
+      };
 
     case "MATCHED_USER":
       let newlyMatchedUser = action.matchedUser;

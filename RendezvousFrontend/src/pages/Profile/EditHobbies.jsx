@@ -1,6 +1,6 @@
 import { React, useContext, useEffect } from "react";
-import Button from "../../components/Helper/Button";
-import Card from "../../components/Helper/Card";
+import Button from "../../components/helper/Button";
+import Card from "../../components/helper/Card";
 import AppContext from "../../context/app-context";
 import RendezvousService from "../../repository/RendezvousRepository";
 import "./Profile.css";

@@ -1,0 +1,18 @@
+.not-found {
+}
+
+.forbidden {
+}
+
+.message-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lg-margin);
+}
+
+.message {
+  text-align: center;
+  color: var(--accent-dark);
+  font-size: var(--lg);
+  font-weight: bold;
+}

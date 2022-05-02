@@ -3,7 +3,7 @@ import { FcLike, FcDislike } from "react-icons/fc";
 import { TiArrowRightThick } from "react-icons/ti";
 import AppContext from "../context/app-context";
 import RendezvousService from "../repository/RendezvousRepository";
-import Card from "./Helper/Card";
+import Card from "./helper/Card";
 import "./UserCard.css";
 
 const UserCard = () => {

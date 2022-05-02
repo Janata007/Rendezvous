@@ -5,6 +5,7 @@
 
 .match-title {
   text-align: center;
+  font-weight: bold;
   color: var(--accent-dark);
 }
 .container {
@@ -21,12 +22,6 @@
   gap: var(--md-margin);
   flex-wrap: wrap;
   justify-content: space-around;
-}
-
-.matches-container p {
-  color: var(--text);
-  font-size: var(--lg);
-  text-align: center;
 }
 
 .match-box {

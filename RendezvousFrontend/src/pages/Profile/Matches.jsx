@@ -1,8 +1,8 @@
 import { React, useContext, useEffect } from "react";
-import Card from "../../components/Helper/Card";
+import Card from "../../components/helper/Card";
 import AppContext from "../../context/app-context";
-import Header from "../../components/Layout/Header";
-import Footer from "../../components/Layout/Footer";
+import Header from "../../components/layout/Header";
+import Footer from "../../components/layout/Footer";
 import "./Matches.css";
 
 const Matches = () => {
@@ -19,11 +19,15 @@ const Matches = () => {
       <Header />
       <div className="container">
         <Card>
-          <h1 className="match-title">Your Matches</h1>
+          <h1 className="match-title">
+            {appContext.matchedUsers.length > 0
+              ? "Your Matches"
+              : "You currently have no matches."}
+          </h1>
         </Card>
 
         <div className="matches-container">
-          {appContext.matchedUsers.length > 0 ? (
+          {appContext.matchedUsers.length > 0 &&
             appContext.matchedUsers.map((user) => {
               return (
                 <div key={user.id} className="match-box">
@@ -41,10 +45,7 @@ const Matches = () => {
                   </button>
                 </div>
               );
-            })
-          ) : (
-            <p>You currently have no matches... yet :D</p>
-          )}
+            })}
         </div>
       </div>
       <Footer />

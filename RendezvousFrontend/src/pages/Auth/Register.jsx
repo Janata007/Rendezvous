@@ -1,7 +1,7 @@
 import { React, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "../../components/Helper/Button";
-import Card from "../../components/Helper/Card";
+import Button from "../../components/helper/Button";
+import Card from "../../components/helper/Card";
 import AppContext from "../../context/app-context";
 import RendezvousService from "../../repository/RendezvousRepository";
 import logo from "../../assets/images/logo.png";

@@ -1,10 +1,10 @@
 import { React, useContext, useEffect, useState } from "react";
-import Button from "../../components/Helper/Button";
-import Card from "../../components/Helper/Card";
-import Hobbies from "../../components/Lists/Hobbies";
-import MusicGenres from "../../components/Lists/Music Genres";
-import Locations from "../../components/Lists/Locations";
-import Sports from "../../components/Lists/Sports";
+import Button from "../../components/helper/Button";
+import Card from "../../components/helper/Card";
+import Hobbies from "../../components/lists/Hobbies";
+import MusicGenres from "../../components/lists/Music Genres";
+import Locations from "../../components/lists/Locations";
+import Sports from "../../components/lists/Sports";
 import AppContext from "../../context/app-context";
 import "./Profile.css";
 const Profile = () => {

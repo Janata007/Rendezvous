@@ -5,14 +5,20 @@ import logo from "../../assets/images/logo.png";
 import "../Pages.css";
 import "./Misc.css";
 
-const NotFound = () => {
+const Forbidden = () => {
   return (
-    <div className="not-found page">
+    <div className="forbidden page">
       <img className="logo" src={logo} alt="rendezvous-logo" />
 
       <Card>
         <div className="message-container">
-          <h1 className="message">Looks like there isn't anything here.</h1>
+          <h1 className="message">
+            You are currently forbidden from viewing the contents of this page.
+          </h1>
+
+          <h1 className="message">
+            Please sign in or create an account if you do not have one.
+          </h1>
         </div>
       </Card>
       <Button text="Back to homepage" navigateTo="" />
@@ -20,4 +26,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default Forbidden;

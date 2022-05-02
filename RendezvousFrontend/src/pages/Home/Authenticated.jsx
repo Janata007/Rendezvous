@@ -1,7 +1,7 @@
 import React from "react";
-import Footer from "../../components/Layout/Footer";
-import Header from "../../components/Layout/Header";
-import Main from "../../components/Layout/Main";
+import Footer from "../../components/layout/Footer";
+import Header from "../../components/layout/Header";
+import Main from "../../components/layout/Main";
 
 const Authenticated = () => {
   return (

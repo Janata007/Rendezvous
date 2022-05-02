@@ -2,8 +2,8 @@ import { React, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import RendezvousService from "../../repository/RendezvousRepository";
 import AppContext from "../../context/app-context";
-import Card from "../../components/Helper/Card";
-import Button from "../../components/Helper/Button";
+import Card from "../../components/helper/Card";
+import Button from "../../components/helper/Button";
 import logo from "../../assets/images/logo.png";
 import "../Pages.css";
 import "./Login.css";
@@ -70,30 +70,32 @@ const Login = () => {
             return data;
           } else setRequestVal(false);
         })
-        .then((data) => {
-          RendezvousService.fetchAllUsers()
-            .then((response) => {
-              return response.data;
-            })
-            .then((data) => {
-              appContext.dispatch({ type: "LOAD_USERS", users: data });
-              navigate("/");
-              setRequestVal(true);
-            })
-            .catch((error) => console.log(error));
-        })
         .then(() => {
-          RendezvousService.fetchGeoLocation()
-            .then((response) => {
-              return response.data;
-            })
-            .then((data) => {
-              appContext.dispatch({
-                type: "ADD_GEOLOCATION",
-                geoLocation: data,
-              });
-            })
-            .catch((error) => console.log(error));
+          if (requestVal) {
+            RendezvousService.fetchAllUsers()
+              .then((response) => {
+                return response.data;
+              })
+              .then((data) => {
+                appContext.dispatch({ type: "LOAD_USERS", users: data });
+                navigate("/");
+                setRequestVal(true);
+              })
+              .then(() => {
+                RendezvousService.fetchGeoLocation()
+                  .then((response) => {
+                    return response.data;
+                  })
+                  .then((data) => {
+                    appContext.dispatch({
+                      type: "ADD_GEOLOCATION",
+                      geoLocation: data,
+                    });
+                  })
+                  .catch((error) => console.log(error));
+              })
+              .catch((error) => console.log(error));
+          } else setRequestVal(false);
         })
         .catch((error) => {
           console.log(error);
