@@ -89,3 +89,42 @@
   text-align: center;
   font-weight: bold;
 }
+
+@media (min-width: 1280px) {
+  .user-card {
+    width: fit-content;
+    min-height: 55vh;
+  }
+
+  .user-image {
+    min-height: 50vh;
+    background-size: 100%;
+  }
+
+  .user-info {
+    padding: var(--lg-padding);
+  }
+
+  .name {
+    margin-bottom: var(--s-margin);
+  }
+
+  .user-actions {
+    justify-content: center;
+    gap: var(--xxl-margin);
+  }
+
+  .action-button,
+  .action-button path {
+    transition: var(--fast-transition);
+  }
+
+  .action-button:hover {
+    cursor: pointer;
+    background-color: var(--accent-dark);
+  }
+
+  .action-button:hover path {
+    fill: var(--accent-light);
+  }
+}

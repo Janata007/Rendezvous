@@ -6,7 +6,7 @@ const AppContext = createContext({
   users: [],
   likedUsers: [],
   dislikedUsers: [],
-  matchedUsers: []
+  matchedUsers: [],
 });
 
 export default AppContext;

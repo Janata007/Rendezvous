@@ -54,9 +54,8 @@
   --lg-radius: 20px;
   --circle: 50%;
 
-  /** URLS */
-
-  /** WIDTHS & HEIGHTS */
+  /** UTILITY*/
+  --fast-transition: all 0.15s ease-in-out;
 }
 
 /*? VARIABLES END */

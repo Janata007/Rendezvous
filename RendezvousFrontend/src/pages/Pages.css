@@ -16,3 +16,13 @@
   width: 100%;
   height: fit-content;
 }
+
+@media (min-width: 1280px) {
+  .page {
+    gap: var(--lg-margin);
+  }
+
+  .logo {
+    width: 30%;
+  }
+}

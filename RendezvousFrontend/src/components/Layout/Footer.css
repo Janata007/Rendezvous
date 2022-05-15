@@ -41,3 +41,16 @@
   height: 30px;
   fill: var(--accent-dark);
 }
+
+@media (min-width: 1280px) {
+  .match-container p,
+  .logout-container p {
+    font-size: var(--xl);
+  }
+
+  .match-container svg,
+  .logout-container svg {
+    width: 40px;
+    height: 40px;
+  }
+}

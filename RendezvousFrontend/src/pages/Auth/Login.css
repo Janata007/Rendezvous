@@ -57,3 +57,22 @@
 .login-error-message.invalid {
   display: block;
 }
+
+@media (min-width: 1280px) {
+  .login-form .button {
+    width: 100%;
+  }
+
+  .login-input {
+    font-size: var(--xl);
+  }
+
+  .login-input::placeholder {
+    font-size: var(--lg);
+    letter-spacing: 4px;
+  }
+
+  .form-group {
+    margin-bottom: var(--lg-margin);
+  }
+}

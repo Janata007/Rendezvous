@@ -49,6 +49,8 @@ export const appReducer = (state, action) => {
   switch (action.type) {
     //AUTH
     case "LOGIN":
+      console.log("goes here");
+
       return {
         ...state,
         isLoggedIn: true,
