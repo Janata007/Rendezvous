@@ -45,3 +45,18 @@
   text-transform: uppercase;
   text-align: center;
 }
+
+@media (min-width: 1280px) {
+  .list {
+    gap: var(--md-margin);
+  }
+
+  .badge {
+    padding: var(--s-padding) var(--md-padding);
+    font-size: var(--md);
+  }
+
+  .edit-link {
+    font-size: var(--md);
+  }
+}

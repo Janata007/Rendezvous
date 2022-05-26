@@ -75,3 +75,29 @@
   border-color: var(--success);
   color: var(--success);
 }
+
+@media (min-width: 1280px) {
+  .personal .card {
+    margin: 0 auto;
+  }
+
+  .email,
+  .city {
+    font-style: italic;
+    font-weight: bold;
+    font-size: var(--lg);
+  }
+
+  .city.invalid {
+    font-size: var(--md);
+  }
+
+  .available {
+    font-size: var(--md);
+  }
+
+  .available.present {
+    border-color: var(--success);
+    color: var(--success);
+  }
+}
